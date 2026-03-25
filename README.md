@@ -2,3 +2,6 @@ A Single Day Game Jam, all in Godot. No expectations, just pure curiosity and de
 
 Authors:
 Alejandro Valdes
+
+Tristan Ligtvoet
+
