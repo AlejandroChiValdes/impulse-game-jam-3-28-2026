@@ -27,12 +27,10 @@ func _physics_process(delta: float):
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("time_shift_down"):
-		#signal time shift down
-		return
+		GameManager.time_control_slow_down.emit()
 	elif Input.is_action_just_pressed("time_shift_up"):
-		#signal time shift up
+		GameManager.time_control_speed_up.emit()
 		return
-	return
 	
 func debug_evaluate_collisions():
 	var collision_count = get_slide_collision_count()
