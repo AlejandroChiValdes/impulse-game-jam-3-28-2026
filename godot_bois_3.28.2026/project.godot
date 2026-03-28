@@ -24,6 +24,10 @@ version_control/autoload_on_startup=true
 
 GameManager="*uid://dpxtquymnim1m"
 
+[dotnet]
+
+project/assembly_name="Godot_Bois_3.28.2026"
+
 [display]
 
 window/size/viewport_width=1920
