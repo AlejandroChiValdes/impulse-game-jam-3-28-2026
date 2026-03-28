@@ -18,6 +18,11 @@ config/name="Godot_Bois_3.28.2026"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
 [input]
 
 move_right={
@@ -51,3 +56,4 @@ time_shift_down={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.03, 0.015, 0.021000002, 1)
