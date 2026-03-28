@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://ceeqhppyneu2r" path="res://Art/Tilesets/TerrainTilemap.tres" id="1_bly3n"]
 [ext_resource type="PackedScene" uid="uid://vrnwhe3u24vr" path="res://Scenes/PlayerCharacter.tscn" id="2_bly3n"]
+[ext_resource type="AudioStream" uid="uid://yyhu3hfpdq50" path="res://Audio/Music/GameJamSlow.mp3" id="3_jw2gy"]
 
 [sub_resource type="TileSet" id="TileSet_jw2gy"]
 
@@ -18,3 +19,8 @@ tile_set = SubResource("TileSet_jw2gy")
 position = Vector2(160, 296.99997)
 scale = Vector2(0.47999758, 0.47999758)
 JUMP_FORCE = 250.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1892787329]
+stream = ExtResource("3_jw2gy")
+autoplay = true
+parameters/looping = true
