@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
-var JUMP_FORCE = 100.0
+var JUMP_FORCE = 500.0
 var DIRECTION = Vector2(0,0)
-var RUN_SPEED = 100
+var RUN_SPEED = 200
 
 func _physics_process(delta: float):
 	velocity.y += GRAVITY * delta
@@ -23,9 +23,18 @@ func _physics_process(delta: float):
 
 	move_and_slide()
 	
-	evaluate_collisions()
+	# debug_evaluate_collisions()
+
+func _process(delta: float):
+	if Input.is_action_just_pressed("time_shift_down"):
+		#signal time shift down
+		return
+	elif Input.is_action_just_pressed("time_shift_up"):
+		#signal time shift up
+		return
+	return
 	
-func evaluate_collisions():
+func debug_evaluate_collisions():
 	var collision_count = get_slide_collision_count()
 	for i in collision_count:
 		var collision = get_slide_collision(i)
