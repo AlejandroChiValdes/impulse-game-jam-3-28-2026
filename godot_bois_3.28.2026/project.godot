@@ -18,6 +18,11 @@ config/name="Godot_Bois_3.28.2026"
 run/main_scene="uid://c3wj5k2om8pd2"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+version_control/autoload_on_startup=true
+
+[autoload]
+
+GameManager="*uid://dpxtquymnim1m"
 
 [display]
 
