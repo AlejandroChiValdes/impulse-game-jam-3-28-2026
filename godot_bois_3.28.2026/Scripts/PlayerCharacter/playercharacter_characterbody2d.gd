@@ -16,7 +16,7 @@ func _physics_process(delta: float):
 	
 	velocity.x = DIRECTION.x * RUN_SPEED
 	
-	if Input.is_action_just_pressed("jump"): #also need a check for if the player is on the floor.
+	if Input.is_action_just_pressed("jump") && is_on_floor(): #also need a check for if the player is on the floor.
 		velocity.y = -1 * JUMP_FORCE
 	
 	print("velocity y: ", velocity.y)
