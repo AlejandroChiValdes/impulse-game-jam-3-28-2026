@@ -25,6 +25,5 @@ JUMP_FORCE = 250.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1892787329]
 stream = ExtResource("3_q66wt")
-autoplay = true
 parameters/looping = true
 script = ExtResource("5_q66wt")
