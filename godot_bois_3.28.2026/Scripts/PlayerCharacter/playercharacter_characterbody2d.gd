@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
-var JUMP_FORCE = 500.0
+@export var JUMP_FORCE = 500.0
+@export var RUN_SPEED = 200
 var DIRECTION = Vector2(0,0)
-var RUN_SPEED = 200
 
 func _physics_process(delta: float):
 	velocity.y += GRAVITY * delta
