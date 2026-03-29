@@ -28,29 +28,18 @@ var is_playback_reversed: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_manager.time_control_changed.connect(_on_time_control_changed)
-	
-	#for child in get_children():
-		#if child is PathFollow2D:
-			#print(child)
-			#track_follow = child
-			#break
 
 	animation_player_ref.current_animation = animation_name
 	return
 
 
 func _physics_process(delta: float) -> void:
-	#animation_player_ref.speed_scale = animation_scale * speed_map[current_speed_type]
-	
+
 	if start_delay:
 		if current_delay_timer >= ping_pong_delay:
-			#delay_timer_finished.emit()
 			is_playback_reversed = not is_playback_reversed
-			print("Restart animations")
 			animation_scale = -1 * animation_scale
-
 			animation_player_ref.speed_scale = animation_scale * speed_map[current_speed_type]
-			print(animation_player_ref.speed_scale)
 			animation_player_ref.play(animation_name, -1, speed_map[current_speed_type], is_playback_reversed)
 
 			current_delay_timer = 0.0
