@@ -19,6 +19,7 @@ var TIME_CONTROL_MULTIPLIER : float = 1.0
 
 func handle_time_control_changed(new_time_control : GameManager.TimeControl):
 	TIME_CONTROL_MULTIPLIER = speed_map[new_time_control]
+	_animated_head_sprite.set_speed_scale(speed_map[new_time_control])
 	
 @onready var _animated_head_sprite = $AnimatedHeadSprite
 @onready var _animated_body_sprite = $AnimatedBodySprite
@@ -26,6 +27,7 @@ func handle_time_control_changed(new_time_control : GameManager.TimeControl):
 func _ready() -> void:
 	_animated_head_sprite.play("default")
 	GameManager.time_control_changed.connect(handle_time_control_changed)
+
 
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.a
@@ -68,12 +70,39 @@ func get_collided_wall_normal():
 		var collision = get_slide_collision(i)
 		return collision.get_normal()
 
+var IS_RUNNING = false
+var POPPED_JUMPING_HEAD = false
+var POPPED_JUMPING_HEAD_MAGNITUDE = 0.0
 func _process(delta: float):
 	if Input.is_action_just_pressed("time_shift_down"):
 		GameManager.time_control_slow_down.emit()
 	elif Input.is_action_just_pressed("time_shift_up"):
 		GameManager.time_control_speed_up.emit()
 		return
+	
+	
+	if Input.is_action_just_pressed("jump") && is_on_wall():
+		_animated_head_sprite.set_position(_animated_head_sprite.position + Vector2(0, -1))
+		POPPED_JUMPING_HEAD_MAGNITUDE += 1
+		POPPED_JUMPING_HEAD = true
+	elif !is_on_floor() && !POPPED_JUMPING_HEAD:
+		_animated_head_sprite.set_position(_animated_head_sprite.position + Vector2(0, -1))
+		POPPED_JUMPING_HEAD_MAGNITUDE += 1
+		POPPED_JUMPING_HEAD = true
+	elif is_on_floor() && POPPED_JUMPING_HEAD:
+		_animated_head_sprite.set_position(_animated_head_sprite.position + Vector2(0, POPPED_JUMPING_HEAD_MAGNITUDE))
+		POPPED_JUMPING_HEAD_MAGNITUDE = 0.0
+		POPPED_JUMPING_HEAD = false
+		
+	#Ensures the head is attached to the body during the player's run animation.
+	if (Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right")) && is_on_floor():
+		if IS_RUNNING == false:
+			_animated_head_sprite.set_position(_animated_head_sprite.position + Vector2(0, 2))
+			IS_RUNNING = true
+	elif IS_RUNNING:
+		#_animated_head_sprite.set_offset(Vector2(0, -1.5))
+		_animated_head_sprite.set_position(_animated_head_sprite.position + Vector2(0, -2))
+		IS_RUNNING = false
 	
 	if Input.is_action_pressed("jump") || !is_on_floor():
 		_animated_body_sprite.play("jump")
