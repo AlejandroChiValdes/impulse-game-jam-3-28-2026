@@ -18,11 +18,13 @@ func _on_time_control_slow_down():
 	if CURRENT_TIME_CONTROL == TimeControl.NORMAL:
 		return
 	CURRENT_TIME_CONTROL -= 1
+	print("Time slowed down to ", TimeControl.find_key(CURRENT_TIME_CONTROL))
 	time_control_changed.emit(CURRENT_TIME_CONTROL)
 	
 func _on_time_control_speed_up():
 	if CURRENT_TIME_CONTROL == TimeControl.FASTEST:
 		return
 	CURRENT_TIME_CONTROL += 1
+	print("Time Control sped up to ", TimeControl.find_key(CURRENT_TIME_CONTROL))
 	time_control_changed.emit(CURRENT_TIME_CONTROL)
 	

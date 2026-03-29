@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://cqpds7nvst2hw"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dc78jstysl86o"]
 
 [ext_resource type="Texture2D" uid="uid://bkwu8grv8juww" path="res://Art/Sprites/PlayerCharacter/Tocks-body-idle1.png" id="1_hsrbr"]
 [ext_resource type="Texture2D" uid="uid://ce6qw604xcdq2" path="res://Art/Sprites/PlayerCharacter/Tocks-body-running-Sheet.png" id="2_yaq23"]

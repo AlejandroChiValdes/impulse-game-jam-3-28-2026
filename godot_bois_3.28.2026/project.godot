@@ -18,7 +18,6 @@ config/name="Godot_Bois_3.28.2026"
 run/main_scene="uid://etlpsrwvd2rf"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
-"<<<<<<<Updatedupstream[editor]version_control/plugin_name"="GitPlugin"
 version_control/autoload_on_startup=true
 
 [autoload]
