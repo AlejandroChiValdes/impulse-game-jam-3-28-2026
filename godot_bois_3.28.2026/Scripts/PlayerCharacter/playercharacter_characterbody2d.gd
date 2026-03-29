@@ -16,12 +16,16 @@ var TIME_CONTROL_MULTIPLIER : float = 1.0
 	GameManager.TimeControl.FASTEST : 1.2
 }
 
-func _ready():
-	GameManager.time_control_changed.connect(handle_time_control_changed)
-
 func handle_time_control_changed(new_time_control : GameManager.TimeControl):
 	TIME_CONTROL_MULTIPLIER = speed_map[new_time_control]
 	
+@onready var _animated_head_sprite = $AnimatedHeadSprite
+@onready var _animated_body_sprite = $AnimatedBodySprite
+
+func _ready() -> void:
+	_animated_head_sprite.play("default")
+	GameManager.time_control_changed.connect(handle_time_control_changed)
+
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.
 	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER
@@ -64,6 +68,17 @@ func _process(delta: float):
 	elif Input.is_action_just_pressed("time_shift_up"):
 		GameManager.time_control_speed_up.emit()
 		return
+	
+	if Input.is_action_pressed("jump") || !is_on_floor():
+		_animated_body_sprite.play("jump")
+	elif Input.is_action_pressed("move_left"):
+		_animated_body_sprite.play("running")
+		_animated_body_sprite.flip_h = true
+	elif Input.is_action_pressed("move_right"):
+		_animated_body_sprite.play("running")
+		_animated_body_sprite.flip_h = false
+	else:
+		_animated_body_sprite.play("default")
 	
 func debug_evaluate_collisions():
 	var collision_count = get_slide_collision_count()
