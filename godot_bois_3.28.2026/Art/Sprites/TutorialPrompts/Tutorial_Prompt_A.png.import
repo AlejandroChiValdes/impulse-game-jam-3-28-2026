@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3xf4ui13fthb"
-path="res://.godot/imported/InputTilemap.png-12c2451049f0692ff13be22bea958a7a.ctex"
+uid="uid://c35arofw4wvv5"
+path="res://.godot/imported/Tutorial_Prompt_A.png-24ae1eb42c6cadbdf065f899605e335b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/InputTilemap.png"
-dest_files=["res://.godot/imported/InputTilemap.png-12c2451049f0692ff13be22bea958a7a.ctex"]
+source_file="res://Art/Sprites/TutorialPrompts/Tutorial_Prompt_A.png"
+dest_files=["res://.godot/imported/Tutorial_Prompt_A.png-24ae1eb42c6cadbdf065f899605e335b.ctex"]
 
 [params]
 
