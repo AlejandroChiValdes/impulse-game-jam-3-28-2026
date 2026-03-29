@@ -10,6 +10,7 @@ radius = 5.0
 height = 28.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1692276012]
+collision_layer = 2
 script = ExtResource("1_v7sut")
 RUN_SPEED = 150.0
 DIRECTION_CHANGE_FORCE_FLOOR = 10.0
@@ -18,7 +19,7 @@ DIRECTION_CHANGE_FORCE_FLOOR = 10.0
 position = Vector2(0, -8)
 scale = Vector2(0.78571427, 0.8000001)
 sprite_frames = ExtResource("2_mdaju")
-frame_progress = 0.31250578
+frame_progress = 0.34637523
 speed_scale = 1.81
 
 [node name="AnimatedBodySprite" type="AnimatedSprite2D" parent="." unique_id=1910808227]
