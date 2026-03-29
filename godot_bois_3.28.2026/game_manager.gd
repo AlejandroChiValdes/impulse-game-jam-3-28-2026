@@ -1,4 +1,5 @@
 extends Node
+
 enum TimeControl {
 	NORMAL = 0,
 	FAST = 1,
