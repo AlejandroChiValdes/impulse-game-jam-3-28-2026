@@ -1,12 +1,4 @@
-@tool
 extends Path2D
-#@export var platform_speed = 5.0
-
-#@export var track_point_1: Vector2 = Vector2.ZERO
-#@export var track_point_2: Vector2 = Vector2.ZERO
-
-#@onready var track_path: Path2D = $TrackPath
-#@onready var tracking_obj: Node2D = $Object
 
 @onready var animation_player_ref: AnimationPlayer = $AnimationPlayer
 @export var animation_scale: float
