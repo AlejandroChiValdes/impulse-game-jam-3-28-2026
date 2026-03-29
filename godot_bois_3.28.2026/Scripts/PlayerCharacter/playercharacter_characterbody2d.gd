@@ -1,31 +1,44 @@
 extends CharacterBody2D
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
-@export var JUMP_FORCE_Y = 500.0
-@export var JUMP_FORCE_Y_WALL = 500.0
+@export var JUMP_FORCE_Y = 50.0
+@export var JUMP_FORCE_Y_WALL = 50.0
 @export var JUMP_FORCE_X = 500.0
 @export var RUN_SPEED = 200.0
 @export var DIRECTION_CHANGE_FORCE_FLOOR = 5.0
 @export var DIRECTION_CHANGE_FORCE_MIDAIR = 10.0
-@export var TO_STANDSTILL_FORCE = 5.0
+@export var TO_STANDSTILL_FORCE = 10.0
 
+var TIME_CONTROL_MULTIPLIER : float = 1.0
+@export var speed_map : Dictionary[GameManager.TimeControl, float] = {
+	GameManager.TimeControl.NORMAL : 1.0,
+	GameManager.TimeControl.FAST : 1.1,
+	GameManager.TimeControl.FASTEST : 1.2
+}
+
+func _ready():
+	GameManager.time_control_changed.connect(handle_time_control_changed)
+
+func handle_time_control_changed(new_time_control : GameManager.TimeControl):
+	TIME_CONTROL_MULTIPLIER = speed_map[new_time_control]
+	
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.
-	velocity.y += GRAVITY * delta
+	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER
 	
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor(): #also need a check for if the player is on the floor.
-			velocity.y = -1 * JUMP_FORCE_Y
+			velocity.y = -1 * JUMP_FORCE_Y * sqrt(TIME_CONTROL_MULTIPLIER)
 		elif is_on_wall():
-			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X
-			velocity.y = -1 * JUMP_FORCE_Y_WALL
+			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TIME_CONTROL_MULTIPLIER
+			velocity.y = -1 * JUMP_FORCE_Y_WALL * sqrt(TIME_CONTROL_MULTIPLIER)
 			debug_evaluate_collisions()
 			return
 			
 	var target_velocity = 0.0
-	var direction_change_force = 1.0
+	var direction_change_force = TIME_CONTROL_MULTIPLIER
 	if Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"):
-		target_velocity = RUN_SPEED
+		target_velocity = RUN_SPEED * TIME_CONTROL_MULTIPLIER
 		
 		if Input.is_action_pressed("move_left"):
 			target_velocity *= -1
