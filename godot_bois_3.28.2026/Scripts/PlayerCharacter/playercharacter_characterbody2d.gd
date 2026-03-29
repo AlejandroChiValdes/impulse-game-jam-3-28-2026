@@ -7,13 +7,14 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var RUN_SPEED = 200.0
 @export var DIRECTION_CHANGE_FORCE_FLOOR = 5.0
 @export var DIRECTION_CHANGE_FORCE_MIDAIR = 10.0
-@export var TO_STANDSTILL_FORCE = 10.0
+@export var TO_STANDSTILL_FORCE_FLOOR = 10.0
+@export var TO_STANDSTILL_FORCE_MIDAIR = 10.0
 
 var TIME_CONTROL_MULTIPLIER : float = 1.0
 @export var speed_map : Dictionary[GameManager.TimeControl, float] = {
 	GameManager.TimeControl.NORMAL : 1.0,
-	GameManager.TimeControl.FAST : 1.1,
-	GameManager.TimeControl.FASTEST : 1.2
+	GameManager.TimeControl.FAST : 2.0,
+	GameManager.TimeControl.FASTEST : 3.0
 }
 
 func handle_time_control_changed(new_time_control : GameManager.TimeControl):
@@ -27,11 +28,13 @@ func _ready() -> void:
 	GameManager.time_control_changed.connect(handle_time_control_changed)
 
 func _physics_process(delta: float):
-	#always apply gravity, unconditional of any user input or horizontal momentum.
+	#always apply gravity, unconditional of any user input or horizontal momentum.a
 	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER
 	
+	var IsOnFloor = is_on_floor()
+	var IsInMidair = get_slide_collision_count() == 0
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor(): #also need a check for if the player is on the floor.
+		if IsOnFloor: #also need a check for if the player is on the floor.
 			velocity.y = -1 * JUMP_FORCE_Y * sqrt(TIME_CONTROL_MULTIPLIER)
 		elif is_on_wall():
 			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TIME_CONTROL_MULTIPLIER
@@ -46,12 +49,15 @@ func _physics_process(delta: float):
 		
 		if Input.is_action_pressed("move_left"):
 			target_velocity *= -1
-		if is_on_floor():
+		if IsOnFloor:
 			direction_change_force *= DIRECTION_CHANGE_FORCE_FLOOR
-		elif get_slide_collision_count() == 0: # player character is midair
+		elif IsInMidair: # player character is midair
 			direction_change_force *= DIRECTION_CHANGE_FORCE_MIDAIR
 	else:
-		direction_change_force *= TO_STANDSTILL_FORCE
+		if IsOnFloor:
+			direction_change_force *= TO_STANDSTILL_FORCE_FLOOR
+		elif IsInMidair:
+			direction_change_force *= TO_STANDSTILL_FORCE_MIDAIR
 	
 	
 	velocity.x = move_toward(velocity.x, target_velocity, direction_change_force)
