@@ -44,11 +44,6 @@ _data = {
 &"UI Promp Pulsing": SubResource("Animation_1cp13")
 }
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jw2gy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jw2gy"]
-size = Vector2(69, 20)
-
 [node name="Level1Tutorial" type="Node2D" unique_id=1489204597]
 
 [node name="TerrainTileMapLayer" type="TileMapLayer" parent="." unique_id=1331884750]
@@ -56,25 +51,15 @@ tile_map_data = PackedByteArray("AAAAAAEAAAAEAAUAAAAAAAIAAAAFAAYAADAAAAMAAAAFAAY
 tile_set = ExtResource("1_bly3n")
 
 [node name="CharacterBody2D" parent="." unique_id=1692276012 instance=ExtResource("2_bly3n")]
-position = Vector2(159, 298.00003)
-=======
 z_index = 1
 position = Vector2(160, 296.99997)
 scale = Vector2(0.47999758, 0.47999758)
-JUMP_FORCE = 250.0
 
 [node name="BGM_AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1892787329]
 stream = ExtResource("3_jw2gy")
 autoplay = true
 parameters/looping = true
 
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=717726473]
-physics_material_override = SubResource("PhysicsMaterial_jw2gy")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1306245788]
-position = Vector2(232.5, 314)
-shape = SubResource("RectangleShape2D_jw2gy")
-=======
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2106816925]
 libraries/ = SubResource("AnimationLibrary_gdkr5")
 autoplay = &"UI Promp Pulsing"
