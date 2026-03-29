@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://dph4ef5ctbewl"]
+
+[ext_resource type="Script" uid="uid://b6et6b7s7kypf" path="res://Scripts/Obstacles/track.gd" id="1_lwckt"]
+[ext_resource type="Texture2D" uid="uid://cruulm8n5ewxe" path="res://Art/Tilesets/AssetPack1.png" id="2_m1wnc"]
+
+[sub_resource type="Curve2D" id="Curve2D_seeld"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 500, -200)
+}
+point_count = 2
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u1lsn"]
+texture = ExtResource("2_m1wnc")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_g7adi"]
+sources/0 = SubResource("TileSetAtlasSource_u1lsn")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t57lt"]
+size = Vector2(32, 16)
+
+[sub_resource type="Animation" id="Animation_usj4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformFollow:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_iqpnw"]
+resource_name = "moving_platform"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformFollow:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5ksx"]
+_data = {
+&"RESET": SubResource("Animation_usj4t"),
+&"moving_platform": SubResource("Animation_iqpnw")
+}
+
+[node name="TrackPath" type="Path2D" unique_id=97374828]
+curve = SubResource("Curve2D_seeld")
+script = ExtResource("1_lwckt")
+animation_scale = 0.5
+ping_pong_delay = 0.15
+speed_map = Array[float]([1.0, 2.0, 3.0])
+
+[node name="PlatformFollow" type="PathFollow2D" parent="." unique_id=1535704970]
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlatformFollow" unique_id=1671434047]
+remote_path = NodePath("../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="PlatformFollow" unique_id=771690120]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="PlatformFollow/AnimatableBody2D" unique_id=619672079]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0)
+tile_set = SubResource("TileSet_g7adi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFollow/AnimatableBody2D" unique_id=1158982145]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_t57lt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=444448148]
+callback_mode_process = 0
+libraries/ = SubResource("AnimationLibrary_l5ksx")
+speed_scale = 0.5
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
