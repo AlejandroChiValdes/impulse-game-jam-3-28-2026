@@ -16,6 +16,7 @@ RUN_SPEED = 150.0
 DIRECTION_CHANGE_FORCE_FLOOR = 10.0
 
 [node name="AnimatedHeadSprite" type="AnimatedSprite2D" parent="." unique_id=811029404]
+z_index = 1
 position = Vector2(0, -8)
 scale = Vector2(0.78571427, 0.8000001)
 sprite_frames = ExtResource("2_mdaju")
@@ -23,9 +24,8 @@ frame_progress = 0.34637523
 speed_scale = 1.81
 
 [node name="AnimatedBodySprite" type="AnimatedSprite2D" parent="." unique_id=1910808227]
-position = Vector2(0, -2)
+position = Vector2(0, -1)
 sprite_frames = ExtResource("2_2getf")
-animation = &"jump"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=792134583]
 position = Vector2(0, -1)
@@ -36,4 +36,5 @@ scale = Vector2(3.1875, 3)
 texture = ExtResource("1_5gnj7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1269795266]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_r4x55")

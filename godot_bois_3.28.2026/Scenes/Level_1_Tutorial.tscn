@@ -12,9 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://b3uqg00wn0tq6" path="res://Art/Sprites/BackgroundArt/Gear 9 - Bronze_spritesheet.png" id="9_13kea"]
 [ext_resource type="Texture2D" uid="uid://5y350ohl7etd" path="res://Art/Sprites/Lighting/Spotlight Texture.png" id="10_13kea"]
 [ext_resource type="PackedScene" uid="uid://r1w386l1ogm6" path="res://Scenes/Props/steampunk_lamp_1.tscn" id="11_varqm"]
+[ext_resource type="Script" uid="uid://dytv10810601x" path="res://Scripts/EndGame/end_game.gd" id="12_varqm"]
 [ext_resource type="PackedScene" uid="uid://3k4vwk3t2cco" path="res://Scenes/Props/steampunk_lamp_2.tscn" id="12_w8ekw"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
+[ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="13_w8ekw"]
+[ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
+[ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
@@ -140,6 +142,8 @@ animations = [{
 "name": &"Gear 9",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0rk"]
 
 [node name="Level1Tutorial" type="Node2D" unique_id=1489204597]
 
@@ -287,6 +291,67 @@ opened_move_distance = -64.0
 [node name="PressurePlate" parent="Pressure Door Combos/PressureDoor" unique_id=1225841854 node_paths=PackedStringArray("connected_object") instance=ExtResource("15_8pn62")]
 position = Vector2(-99, -16)
 connected_object = NodePath("..")
+
+[node name="Spawn Spotlight" type="PointLight2D" parent="." unique_id=1829403256]
+position = Vector2(158.00002, 248)
+scale = Vector2(3.578125, 3.578125)
+texture = ExtResource("10_13kea")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1692091987 node_paths=PackedStringArray("game_over_ui")]
+collision_mask = 3
+script = ExtResource("12_varqm")
+game_over_ui = NodePath("../CanvasLayer/GameEndUICanvas")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1286381126]
+position = Vector2(1250, 354)
+shape = SubResource("RectangleShape2D_4g0rk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=678163774]
+
+[node name="GameEndUICanvas" type="Control" parent="CanvasLayer" unique_id=275161265]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_w8ekw")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GameEndUICanvas" unique_id=1750615014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameEndUICanvas/Panel" unique_id=1916841189]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=669701582]
+layout_mode = 2
+text = "Level Complete!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label" unique_id=476574553]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.348
+offset_left = 40.0
+offset_top = 32.0
+offset_right = -42.0
+offset_bottom = 31.995998
+text = "Exit"
+
+[connection signal="pressed" from="CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label/Button" to="CanvasLayer/GameEndUICanvas" method="_on_button_pressed"]
 
 [editable path="Lighting/Lamp"]
 [editable path="Lighting/Lamp5"]
