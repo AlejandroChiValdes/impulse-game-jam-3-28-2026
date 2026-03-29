@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c8vcot3dv8c18"]
+
+[ext_resource type="Script" uid="uid://bbf55mu2tirn0" path="res://pressure_door.gd" id="1_eee77"]
+[ext_resource type="Texture2D" uid="uid://gib4t1j6w47e" path="res://Art/Tilesets/Tiles-door.png" id="2_ihc50"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wmtq7"]
+texture = ExtResource("2_ihc50")
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_v7r2p"]
+sources/0 = SubResource("TileSetAtlasSource_wmtq7")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v83y8"]
+size = Vector2(16, 64)
+
+[node name="PressureDoor" type="Node2D" unique_id=561114916]
+script = ExtResource("1_eee77")
+opened_move_distance = 64.0
+speed_map = [1.0, 1.5, 2.0]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1593050698]
+collision_mask = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AnimatableBody2D" unique_id=1753555069]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 1, 0, 0, 0, 0, 80, 0, 0, 254, 255, 0, 0, 1, 0, 0, 0, 0, 80, 0, 0, 253, 255, 0, 0, 1, 0, 0, 0, 0, 80, 0, 0, 252, 255, 0, 0, 1, 0, 0, 0, 0, 80)
+tile_set = SubResource("TileSet_v7r2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1144113121]
+position = Vector2(8, -32)
+shape = SubResource("RectangleShape2D_v83y8")

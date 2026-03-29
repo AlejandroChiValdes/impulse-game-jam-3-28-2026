@@ -148,9 +148,9 @@ position = Vector2(160, 291)
 scale = Vector2(2, 2)
 JUMP_FORCE_Y = 300.0
 JUMP_FORCE_Y_WALL = 350.0
-JUMP_FORCE_X = 180.0
-DIRECTION_CHANGE_FORCE_MIDAIR = 20.0
-TO_STANDSTILL_FORCE = 15.0
+JUMP_FORCE_X = 280.0
+DIRECTION_CHANGE_FORCE_FLOOR = 20.0
+TO_STANDSTILL_FORCE_MIDAIR = 5.0
 
 [node name="BGM_AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1892787329]
 stream = ExtResource("3_jw2gy")
