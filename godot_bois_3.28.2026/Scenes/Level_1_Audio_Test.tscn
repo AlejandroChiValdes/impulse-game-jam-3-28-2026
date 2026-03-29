@@ -19,8 +19,8 @@ tile_set = ExtResource("1_eykta")
 tile_set = SubResource("TileSet_jw2gy")
 
 [node name="CharacterBody2D" parent="." unique_id=1692276012 instance=ExtResource("2_bmmf7")]
-position = Vector2(160, 296.99997)
-scale = Vector2(0.47999758, 0.47999758)
+position = Vector2(159, 292)
+scale = Vector2(2, 2)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1892787329]
 stream = ExtResource("3_q66wt")
