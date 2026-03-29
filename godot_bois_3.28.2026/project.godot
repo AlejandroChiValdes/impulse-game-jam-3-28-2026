@@ -76,4 +76,4 @@ time_shift_down={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.03, 0.015, 0.021000002, 1)
+environment/defaults/default_clear_color=Color(0.19161734, 0.18264395, 0.21639901, 1)
