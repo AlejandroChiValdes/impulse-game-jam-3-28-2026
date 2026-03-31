@@ -28,7 +28,10 @@ func _ready() -> void:
 	_animated_head_sprite.play("default")
 	GameManager.time_control_changed.connect(handle_time_control_changed)
 
-
+#Initialize at INT_MAX and replace at player's first jump input.
+var INT_MAX = 9223372036854775806
+var FRAMES_SINCE_JUMPED = INT_MAX
+@export var INPUT_BUFFER_FRAMES = 15
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.a
 	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER
@@ -36,14 +39,21 @@ func _physics_process(delta: float):
 	var IsOnFloor = is_on_floor()
 	var IsInMidair = get_slide_collision_count() == 0
 	var TimeControlForceMultiplier = sqrt(TIME_CONTROL_MULTIPLIER)
-	if Input.is_action_just_pressed("jump"):
+	
+	update_input_buffer_values()
+	var DidJump = false
+	if Input.is_action_just_pressed("jump") || FRAMES_SINCE_JUMPED <= INPUT_BUFFER_FRAMES:
+		print("Frames since jumped: ", FRAMES_SINCE_JUMPED)
+		print("INPUT_BUFFER_FRAMES: ", INPUT_BUFFER_FRAMES)
 		if IsOnFloor: #also need a check for if the player is on the floor.
 			velocity.y = -1 * JUMP_FORCE_Y * TimeControlForceMultiplier
+			DidJump = true
 		elif is_on_wall():
 			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TimeControlForceMultiplier
 			velocity.y = -1 * JUMP_FORCE_Y_WALL * TimeControlForceMultiplier
-			debug_evaluate_collisions()
-			return
+			DidJump = true
+	if DidJump:
+		FRAMES_SINCE_JUMPED = INT_MAX
 			
 	var target_velocity = 0.0
 	var direction_change_force = TimeControlForceMultiplier
@@ -55,7 +65,7 @@ func _physics_process(delta: float):
 			direction_change_force *= DIRECTION_CHANGE_FORCE_FLOOR * TimeControlForceMultiplier
 		elif IsInMidair: # player character is midair
 			direction_change_force *= DIRECTION_CHANGE_FORCE_MIDAIR * TimeControlForceMultiplier
-	else:
+	else: #Player isn't inputting any keyboard inputs
 		if IsOnFloor:
 			direction_change_force *= TO_STANDSTILL_FORCE_FLOOR * TimeControlForceMultiplier
 		elif IsInMidair:
@@ -64,6 +74,12 @@ func _physics_process(delta: float):
 	
 	velocity.x = move_toward(velocity.x, target_velocity, direction_change_force)
 	move_and_slide()
+	
+func update_input_buffer_values():
+	if Input.is_action_just_pressed("jump"):
+		FRAMES_SINCE_JUMPED = 0
+	else:
+		FRAMES_SINCE_JUMPED = min(FRAMES_SINCE_JUMPED + 1, INT_MAX)
 
 func get_collided_wall_normal():
 	for i in get_slide_collision_count():

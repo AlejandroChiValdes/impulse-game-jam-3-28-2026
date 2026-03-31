@@ -15,8 +15,8 @@
 [ext_resource type="Script" uid="uid://dytv10810601x" path="res://Scripts/EndGame/end_game.gd" id="12_varqm"]
 [ext_resource type="PackedScene" uid="uid://3k4vwk3t2cco" path="res://Scenes/Props/steampunk_lamp_2.tscn" id="12_w8ekw"]
 [ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="13_w8ekw"]
-[ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
-[ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
+[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
+[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
