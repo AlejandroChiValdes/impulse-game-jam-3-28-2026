@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
+var GOD_MODE = 0
 @export var JUMP_FORCE_Y = 50.0
 @export var JUMP_FORCE_Y_WALL = 50.0
 @export var JUMP_FORCE_X = 500.0
@@ -34,7 +35,7 @@ var FRAMES_SINCE_JUMPED = INT_MAX
 @export var INPUT_BUFFER_FRAMES = 15
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.a
-	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER
+	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER * float(!GOD_MODE)
 	
 	var IsOnFloor = is_on_floor()
 	var IsInMidair = get_slide_collision_count() == 0
@@ -90,12 +91,22 @@ var IS_RUNNING = false
 var POPPED_JUMPING_HEAD = false
 var POPPED_JUMPING_HEAD_MAGNITUDE = 0.0
 func _process(delta: float):
+	# God Mode toggles collision and physics
+	if Input.is_action_just_pressed("God Mode"):
+		GOD_MODE = !GOD_MODE
+		get_node("CollisionShape2D").disabled = !get_node("CollisionShape2D").disabled
+			
+	if(GOD_MODE):
+		if Input.is_action_pressed("move_up"):
+			velocity.y = -64
+		elif Input.is_action_pressed("move_down"):
+			velocity.y = 64
+	
 	if Input.is_action_just_pressed("time_shift_down"):
 		GameManager.time_control_slow_down.emit()
 	elif Input.is_action_just_pressed("time_shift_up"):
 		GameManager.time_control_speed_up.emit()
 		return
-	
 	
 	if Input.is_action_just_pressed("jump") && is_on_wall():
 		_animated_head_sprite.set_position(_animated_head_sprite.position + Vector2(0, -1))
