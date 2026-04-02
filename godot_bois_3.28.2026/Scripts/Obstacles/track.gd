@@ -3,6 +3,7 @@ extends Path2D
 @onready var animation_player_ref: AnimationPlayer = $AnimationPlayer
 @export var animation_scale: float
 @export var ping_pong_delay: float = 0.0
+@export var START_POINT_SECONDS: float = 0.0
 
 @export var speed_map: Array[float]
 var current_speed_type: GameManager.TimeControl = 0
@@ -22,6 +23,7 @@ func _ready() -> void:
 	game_manager.time_control_changed.connect(_on_time_control_changed)
 
 	animation_player_ref.current_animation = animation_name
+	animation_player_ref.advance(START_POINT_SECONDS)
 	return
 
 

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var GOD_MODE = 0
+var GOD_MODE_SPEED_MULT = 3
 @export var JUMP_FORCE_Y = 50.0
 @export var JUMP_FORCE_Y_WALL = 50.0
 @export var JUMP_FORCE_X = 500.0
@@ -59,7 +60,7 @@ func _physics_process(delta: float):
 	var target_velocity = 0.0
 	var direction_change_force = TimeControlForceMultiplier
 	if Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"):
-		target_velocity = RUN_SPEED * TimeControlForceMultiplier
+		target_velocity = RUN_SPEED * TimeControlForceMultiplier * get_god_mode_speed_mult(GOD_MODE)
 		if Input.is_action_pressed("move_left"):
 			target_velocity *= -1
 		if IsOnFloor:
@@ -98,9 +99,9 @@ func _process(delta: float):
 			
 	if(GOD_MODE):
 		if Input.is_action_pressed("move_up"):
-			velocity.y = -64
+			velocity.y = -64 * TIME_CONTROL_MULTIPLIER
 		elif Input.is_action_pressed("move_down"):
-			velocity.y = 64
+			velocity.y = 64 * TIME_CONTROL_MULTIPLIER
 	
 	if Input.is_action_just_pressed("time_shift_down"):
 		GameManager.time_control_slow_down.emit()
@@ -148,3 +149,9 @@ func debug_evaluate_collisions():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		continue
+		
+func get_god_mode_speed_mult(is_god_mode: bool):
+	if(is_god_mode):
+		return GOD_MODE_SPEED_MULT
+	else:
+		return 1
