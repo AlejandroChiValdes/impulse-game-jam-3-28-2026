@@ -112,7 +112,7 @@ _data = {
 curve = SubResource("Curve2D_seeld")
 script = ExtResource("1_t57lt")
 animation_scale = 0.25
-ping_pong_delay = 0.15
+base_ping_pong_delay = 0.15
 speed_map = Array[float]([1.0, 2.0, 3.0])
 
 [node name="PlatformFollow" type="PathFollow2D" parent="." unique_id=1535704970]
@@ -122,6 +122,7 @@ rotates = false
 remote_path = NodePath("../AnimatableBody2D")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="PlatformFollow" unique_id=771690120]
+sync_to_physics = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="PlatformFollow/AnimatableBody2D" unique_id=619672079]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 2, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 4, 0, 0, 0)
@@ -130,6 +131,33 @@ tile_set = SubResource("TileSet_g7adi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFollow/AnimatableBody2D" unique_id=1158982145]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_t57lt")
+
+[node name="DebugUI" type="Control" parent="PlatformFollow/AnimatableBody2D" unique_id=1327873448]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Playback Rate" type="Label" parent="PlatformFollow/AnimatableBody2D/DebugUI" unique_id=1511419191]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "test"
+
+[node name="ColorRect" type="ColorRect" parent="PlatformFollow/AnimatableBody2D/DebugUI" unique_id=2074890708]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -100.0
+offset_right = -31.0
+offset_bottom = 100.0
+
+[node name="ColorRect2" type="ColorRect" parent="PlatformFollow/AnimatableBody2D/DebugUI" unique_id=1478136068]
+layout_mode = 0
+offset_left = 32.0
+offset_top = -100.0
+offset_right = 33.0
+offset_bottom = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=444448148]
 callback_mode_process = 0
