@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://jwoon3caf14n"]
+
+[ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="1_31h6n"]
+
+[node name="GameEndUICanvas" type="Control" unique_id=299939862]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_31h6n")
+
+[node name="Panel" type="Panel" parent="." unique_id=1072809820]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=504604445]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1344702538]
+layout_mode = 2
+text = "Level Complete!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/Label" unique_id=1155536237]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.348
+offset_left = 40.0
+offset_top = 32.0
+offset_right = -42.0
+offset_bottom = 31.995998
+text = "Exit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Label/Button" to="." method="_on_button_pressed"]

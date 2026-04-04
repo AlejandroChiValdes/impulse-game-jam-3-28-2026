@@ -1,0 +1,20 @@
+[gd_resource type="TileSet" format=3 uid="uid://dwevn0hkdneoe"]
+
+[ext_resource type="Texture2D" uid="uid://cvyj2lwj554xk" path="res://Art/Tilesets/PressureConnection.png" id="1_hgxuw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b5h4j"]
+texture = ExtResource("1_hgxuw")
+0:0/animation_speed = 5.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/0 = 0
+0:1/animation_columns = 3
+0:1/animation_speed = 5.0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/animation_frame_2/duration = 1.0
+0:1/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_b5h4j")
