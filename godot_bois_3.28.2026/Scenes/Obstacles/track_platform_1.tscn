@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6et6b7s7kypf" path="res://Scripts/Obstacles/track.gd" id="1_t57lt"]
 [ext_resource type="Texture2D" uid="uid://cruulm8n5ewxe" path="res://Art/Tilesets/AssetPack1.png" id="2_g7adi"]
+[ext_resource type="Texture2D" uid="uid://becreix6c3su7" path="res://Art/Sprites/Effects/Smoke Fx  Pixel 06-puff-2.png" id="3_xjchn"]
 
 [sub_resource type="Curve2D" id="Curve2D_seeld"]
 _data = {
@@ -72,6 +73,101 @@ sources/0 = SubResource("TileSetAtlasSource_u1lsn")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t57lt"]
 size = Vector2(64, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2uq8"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q8uq"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5jo2"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0vr7"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kga0a"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ah40"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8uik"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srgdj"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e7wm"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmtpd"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aglg0"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkht6"]
+atlas = ExtResource("3_xjchn")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ye7vp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2uq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q8uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5jo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0vr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kga0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ah40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8uik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srgdj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e7wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmtpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aglg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkht6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2uq8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
 [sub_resource type="Animation" id="Animation_usj4t"]
 length = 0.001
 tracks/0/type = "value"
@@ -131,6 +227,23 @@ tile_set = SubResource("TileSet_g7adi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFollow/AnimatableBody2D" unique_id=1158982145]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_t57lt")
+
+[node name="StopSmokeL" type="AnimatedSprite2D" parent="PlatformFollow/AnimatableBody2D" unique_id=515318696]
+z_index = -1
+position = Vector2(-40, 20)
+rotation = -1.5707964
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ye7vp")
+frame = 12
+frame_progress = 1.0
+
+[node name="StopSmokeR" type="AnimatedSprite2D" parent="PlatformFollow/AnimatableBody2D" unique_id=2023570623]
+z_index = -1
+position = Vector2(40, 20)
+rotation = -1.5707964
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ye7vp")
+flip_v = true
 
 [node name="DebugUI" type="Control" parent="PlatformFollow/AnimatableBody2D" unique_id=1327873448]
 visible = false
