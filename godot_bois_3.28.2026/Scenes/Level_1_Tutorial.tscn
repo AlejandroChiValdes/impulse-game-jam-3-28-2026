@@ -1,7 +1,5 @@
 [gd_scene format=4 uid="uid://etlpsrwvd2rf"]
 
-[ext_resource type="PackedScene" uid="uid://dmuwwv6vvpm8m" path="res://Scenes/Utility/game_timer.tscn" id="1_tnel1"]
-[ext_resource type="Texture2D" uid="uid://cruulm8n5ewxe" path="res://Art/Tilesets/AssetPack1.png" id="2_75xr7"]
 [ext_resource type="PackedScene" uid="uid://vrnwhe3u24vr" path="res://Scenes/PlayerCharacter.tscn" id="2_bly3n"]
 [ext_resource type="AudioStream" uid="uid://yyhu3hfpdq50" path="res://Audio/Music/GameJamSlow.mp3" id="3_jw2gy"]
 [ext_resource type="TileSet" uid="uid://dap5t8t8yllk7" path="res://Art/Tilesets/AssetPack1.tres" id="3_qmo6t"]
@@ -17,85 +15,8 @@
 [ext_resource type="Script" uid="uid://dytv10810601x" path="res://Scripts/EndGame/end_game.gd" id="12_varqm"]
 [ext_resource type="PackedScene" uid="uid://3k4vwk3t2cco" path="res://Scenes/Props/steampunk_lamp_2.tscn" id="12_w8ekw"]
 [ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="13_w8ekw"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
-[ext_resource type="PackedScene" uid="uid://dph4ef5ctbewl" path="res://Scenes/Obstacles/track_platform_2.tscn" id="18_gqqus"]
-[ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
-
-[sub_resource type="Curve2D" id="Curve2D_qmo6t"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 158, 0)
-}
-point_count = 2
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tnel1"]
-texture = ExtResource("2_75xr7")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
-2:5/0 = 0
-3:5/0 = 0
-4:5/0 = 0
-5:5/0 = 0
-6:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-3:6/0 = 0
-4:6/0 = 0
-5:6/0 = 0
-6:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-0:8/0 = 0
-1:8/0 = 0
-2:8/0 = 0
-3:8/0 = 0
-4:8/0 = 0
-5:8/0 = 0
-6:8/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_acvo0"]
-sources/1 = SubResource("TileSetAtlasSource_tnel1")
-=======
 [ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
 [ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
->>>>>>> f91dfa35701f52c53079a0590fca3cdee098b691
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
@@ -269,47 +190,6 @@ point_count = 2
 [node name="Level1Tutorial" type="Node2D" unique_id=1489204597]
 metadata/_edit_horizontal_guides_ = [-192.0, -200.0]
 
-<<<<<<< HEAD
-[node name="GameTimer" parent="." unique_id=678673295 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("1_tnel1")]
-PlayerCharacter = NodePath("../Level Segment 1/CharacterBody2D")
-
-[node name="Level Segment 2" type="Node2D" parent="." unique_id=418704245]
-position = Vector2(-64, 144)
-
-[node name="Track Platform 6" parent="Level Segment 2" unique_id=97374828 instance=ExtResource("6_gdkr5")]
-position = Vector2(4288, -576)
-curve = SubResource("Curve2D_qmo6t")
-START_POINT_SECONDS = 1.6
-
-[node name="Track Platform 7" parent="Level Segment 2" unique_id=1061616834 instance=ExtResource("6_gdkr5")]
-position = Vector2(4288, -672)
-curve = SubResource("Curve2D_qmo6t")
-START_POINT_SECONDS = 1.2
-
-[node name="Track Platform 8" parent="Level Segment 2" unique_id=176497524 instance=ExtResource("6_gdkr5")]
-position = Vector2(4288, -768)
-curve = SubResource("Curve2D_qmo6t")
-START_POINT_SECONDS = 0.8
-
-[node name="Track Platform 9" parent="Level Segment 2" unique_id=1634723256 instance=ExtResource("6_gdkr5")]
-position = Vector2(4288, -864)
-curve = SubResource("Curve2D_qmo6t")
-START_POINT_SECONDS = 0.4
-
-[node name="Terrain" type="TileMapLayer" parent="Level Segment 2" unique_id=1773842988]
-tile_map_data = PackedByteArray("AAD0ANz/AQAAAAAAAAD0AOL/AQAAAAAAAAD1ANz/AQABAAAAAAD1AOL/AQABAAAAAAD2ANz/AQAAAAAAAAD2AOL/AQAAAAAAAAD3ANz/AQABAAAAAAD3AOL/AQABAAAAAAD4ANz/AQAAAAAAAAD4AOL/AQAAAAAAAAD5ANz/AQABAAAAAAD5AOL/AQABAAAAAAD6ANz/AQAAAAAAAAD6AOL/AQAAAAAAAAD7ANz/AQABAAAAAAD7AOL/AQABAAAAAAD8ANz/AQAAAAAAAAD8AOL/AQAAAAAAAAD9ANz/AQABAAAAAAD9AOL/AQABAAAAAAD+ANz/AQAAAAAAAAD+AOL/AQAAAAAAAAD/ANz/AQABAAAAAAD/AOL/AQABAAAAAAAAAdz/AQAAAAAAAAAAAeL/AQAAAAAAAAABAdz/AQABAAAAAAABAeL/AQABAAAAAAACAdz/AQAAAAAAAAACAeL/AQAAAAAAAAADAdz/AQABAAAAAAADAeL/AQABAAAAAAAEAeL/AQAAAAAAAAAFAeL/AQABAAAAAAAGAcT/AQAAAAAAAFAGAcX/AQABAAAAAFAGAcb/AQAAAAAAAFAGAcf/AQABAAAAAFAGAcj/AQAAAAAAAFAGAcn/AQABAAAAAFAGAcr/AQAAAAAAAFAGAcv/AQABAAAAAFAGAcz/AQAAAAAAAFAGAc3/AQABAAAAAFAGAc7/AQAAAAAAAFAGAc//AQABAAAAAFAGAdD/AQAAAAAAAFAGAdH/AQABAAAAAFAGAdL/AQAAAAAAAFAGAdP/AQABAAAAAFAGAdT/AQAAAAAAAFAGAdf/AQABAAAAAFAGAdj/AQAAAAAAAFAGAdn/AQABAAAAAFAGAdr/AQAAAAAAAFAGAdv/AQABAAAAAFAGAeL/AQAAAAAAAAAHAeL/AQABAAAAAAAIAeL/AQAAAAAAAAAJAeL/AQABAAAAAAAKAeL/AQAAAAAAAAALAeL/AQABAAAAAAAMAeL/AQAAAAAAAAANAeL/AQABAAAAAAAOAeL/AQAAAAAAAAAPAeL/AQABAAAAAAAQAeL/AQAAAAAAAAARAeL/AQABAAAAAAASAeL/AQAAAAAAAAATAeL/AQABAAAAAAAUAeL/AQAAAAAAAAAVAeL/AQABAAAAAAAWAeL/AQAAAAAAAAAXAeL/AQABAAAAAAAYAeL/AQAAAAAAAAAZAeL/AQABAAAAAAAaAeL/AQAAAAAAAAAbAcT/AQABAAAAAGAbAcX/AQAAAAAAAGAbAcb/AQABAAAAAGAbAcf/AQAAAAAAAGAbAcj/AQABAAAAAGAbAcn/AQAAAAAAAGAbAcr/AQABAAAAAGAbAcv/AQAAAAAAAGAbAcz/AQABAAAAAGAbAc3/AQAAAAAAAGAbAc7/AQABAAAAAGAbAc//AQAAAAAAAGAbAdD/AQABAAAAAGAbAdH/AQAAAAAAAGAbAdL/AQABAAAAAGAbAdP/AQAAAAAAAGAbAdT/AQABAAAAAGAbAdX/AQAAAAAAAGAbAdb/AQABAAAAAGAbAdf/AQAAAAAAAGAbAdj/AQABAAAAAGAbAdn/AQAAAAAAAGAbAdr/AQABAAAAAGAbAdv/AQAAAAAAAGAbAdz/AQABAAAAAGAbAd3/AQAAAAAAAGAbAd7/AQABAAAAAGAbAd//AQAAAAAAAGAbAeD/AQABAAAAAGAbAeH/AQAAAAAAAGAbAeL/AQABAAAAAAAGAdX/AQABAAAAAFAGAdb/AQAAAAAAAFA=")
-tile_set = SubResource("TileSet_acvo0")
-collision_visibility_mode = 1
-
-[node name="Level Segment 3" type="Node2D" parent="." unique_id=266765334]
-position = Vector2(64, 304)
-
-[node name="Terrain" type="TileMapLayer" parent="Level Segment 3" unique_id=814591707]
-tile_map_data = PackedByteArray("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")
-tile_set = ExtResource("3_qmo6t")
-
-=======
->>>>>>> f91dfa35701f52c53079a0590fca3cdee098b691
 [node name="Level Segment 1" type="Node2D" parent="." unique_id=868807960]
 
 [node name="Terrain" type="TileMapLayer" parent="Level Segment 1" unique_id=1331884750]
@@ -431,18 +311,6 @@ position = Vector2(158.00002, 248)
 scale = Vector2(3.578125, 3.578125)
 texture = ExtResource("10_13kea")
 
-<<<<<<< HEAD
-[node name="Area2D" type="Area2D" parent="Level Segment 1" unique_id=1692091987 node_paths=PackedStringArray("game_over_ui")]
-collision_mask = 3
-script = ExtResource("12_varqm")
-game_over_ui = NodePath("../../CanvasLayer/GameEndUICanvas")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level Segment 1/Area2D" unique_id=1286381126]
-position = Vector2(1250, 354)
-shape = SubResource("RectangleShape2D_4g0rk")
-
-=======
->>>>>>> f91dfa35701f52c53079a0590fca3cdee098b691
 [node name="Obstacles" type="Node" parent="Level Segment 1" unique_id=1036108006]
 
 [node name="Track Platform 1" parent="Level Segment 1/Obstacles" unique_id=1721711965 instance=ExtResource("6_gdkr5")]
@@ -653,12 +521,8 @@ connected_object = NodePath("../PressureDoor3")
 [node name="TrackPath3" parent="Level Segment 5" unique_id=146254171 instance=ExtResource("6_gdkr5")]
 position = Vector2(6000, -1024)
 curve = SubResource("Curve2D_keuui")
-<<<<<<< HEAD
-animation_scale = 0.15
-=======
 animation_scale = 0.3
 base_ping_pong_delay = 0.5
->>>>>>> f91dfa35701f52c53079a0590fca3cdee098b691
 
 [node name="TrackPathShort1" parent="Level Segment 5" unique_id=645576560 instance=ExtResource("6_gdkr5")]
 position = Vector2(6296, -1008)
@@ -781,45 +645,7 @@ layout_mode = 2
 text = "Level Complete!"
 horizontal_alignment = 1
 
-<<<<<<< HEAD
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1298321169]
-
-[node name="GameEndUICanvas" type="Control" parent="CanvasLayer" unique_id=275161265]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_w8ekw")
-
-[node name="Panel" type="Panel" parent="CanvasLayer/GameEndUICanvas" unique_id=1750615014]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameEndUICanvas/Panel" unique_id=1916841189]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=669701582]
-layout_mode = 2
-text = "Level Complete!"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label" unique_id=476574553]
-=======
 [node name="Button" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label" unique_id=476574553]
->>>>>>> f91dfa35701f52c53079a0590fca3cdee098b691
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -830,14 +656,7 @@ offset_right = -42.0
 offset_bottom = 31.995998
 text = "Exit"
 
-<<<<<<< HEAD
-[node name="Control" parent="CanvasLayer" unique_id=399532159 node_paths=PackedStringArray("GameTimer") instance=ExtResource("20_qmo6t")]
-GameTimer = NodePath("../../GameTimer")
-
-[connection signal="pressed" from="CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label/Button" to="CanvasLayer/GameEndUICanvas" method="_on_button_pressed"]
-=======
 [connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label/Button" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_button_pressed"]
->>>>>>> f91dfa35701f52c53079a0590fca3cdee098b691
 
 [editable path="Level Segment 1/Lighting/Lamp"]
 [editable path="Level Segment 1/Lighting/Lamp5"]
