@@ -17,13 +17,16 @@ var GOD_MODE_SPEED_MULT = 3
 @onready var head_color: AnimatedSprite2D = $AnimatedHeadSprite/HeadColor
 @export var head_color_map: Dictionary[GameManager.TimeControl, Color]
 
-
 var TIME_CONTROL_MULTIPLIER : float = 1.0
 @export var speed_map : Dictionary[GameManager.TimeControl, float] = {
 	GameManager.TimeControl.NORMAL : 1.0,
 	GameManager.TimeControl.FAST : 2.0,
 	GameManager.TimeControl.FASTEST : 3.0
 }
+
+#Used to kick off in-game timer
+var has_player_moved : bool = false
+signal player_started_moving
 
 func handle_time_control_changed(new_time_control : GameManager.TimeControl):
 	if smoke_fx.is_playing() or time_light_fx.is_playing():
@@ -49,6 +52,7 @@ func _ready() -> void:
 var INT_MAX = 9223372036854775806
 var FRAMES_SINCE_JUMPED = INT_MAX
 @export var INPUT_BUFFER_FRAMES = 15
+var HAS_BURNED_WALL_JUMP : bool = false
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.a
 	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER * float(!GOD_MODE)
@@ -57,17 +61,20 @@ func _physics_process(delta: float):
 	var IsInMidair = get_slide_collision_count() == 0
 	var TimeControlForceMultiplier = sqrt(TIME_CONTROL_MULTIPLIER)
 	
+	if IsOnFloor && HAS_BURNED_WALL_JUMP:
+		HAS_BURNED_WALL_JUMP = false
 	update_input_buffer_values()
 	var DidJump = false
 	if Input.is_action_just_pressed("jump") || FRAMES_SINCE_JUMPED <= INPUT_BUFFER_FRAMES:
 		print("Frames since jumped: ", FRAMES_SINCE_JUMPED)
 		print("INPUT_BUFFER_FRAMES: ", INPUT_BUFFER_FRAMES)
-		if IsOnFloor: #also need a check for if the player is on the floor.
+		if IsOnFloor:
 			velocity.y = -1 * JUMP_FORCE_Y * TimeControlForceMultiplier
 			DidJump = true
-		elif is_on_wall():
+		elif is_on_wall() && !HAS_BURNED_WALL_JUMP:
 			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TimeControlForceMultiplier
 			velocity.y = -1 * JUMP_FORCE_Y_WALL * TimeControlForceMultiplier
+			HAS_BURNED_WALL_JUMP = true
 			DidJump = true
 	if DidJump:
 		FRAMES_SINCE_JUMPED = INT_MAX
@@ -107,6 +114,11 @@ var IS_RUNNING = false
 var POPPED_JUMPING_HEAD = false
 var POPPED_JUMPING_HEAD_MAGNITUDE = 0.0
 func _process(delta: float):
+	#Note: May need to make a custom function to check if any "movement" inputs have been pressed,
+	#as currently any single mouse movement or keystroke will start the timer.
+	if !has_player_moved && is_movement_input_pressed():
+		player_started_moving.emit()
+		has_player_moved = true
 	# God Mode toggles collision and physics
 	if Input.is_action_just_pressed("God Mode"):
 		GOD_MODE = !GOD_MODE
@@ -157,6 +169,9 @@ func _process(delta: float):
 		_animated_body_sprite.flip_h = false
 	else:
 		_animated_body_sprite.play("default")
+
+func is_movement_input_pressed():
+	return Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right") || Input.is_action_pressed("jump")
 	
 func debug_evaluate_collisions():
 	var collision_count = get_slide_collision_count()

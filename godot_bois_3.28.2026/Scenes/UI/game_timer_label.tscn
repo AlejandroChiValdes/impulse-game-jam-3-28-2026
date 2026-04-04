@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://sl7vh7fe4qnr"]
+
+[ext_resource type="Script" uid="uid://dh7arju6hy6gb" path="res://Scripts/UI/Timer/rich_text_label.gd" id="2_emux4"]
+[ext_resource type="Script" uid="uid://c2yrqgdbwmucu" path="res://Scripts/UI/Timer/timer_text_control_node.gd" id="2_ncbi2"]
+
+[node name="Control" type="Control" unique_id=399532159]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ncbi2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=459197590]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+horizontal_alignment = 2
+script = ExtResource("2_emux4")

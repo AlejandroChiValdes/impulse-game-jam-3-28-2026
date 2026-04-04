@@ -22,12 +22,24 @@ var prev_fully_open: bool
 @export var speed_map: Array[float]
 var current_time_control: int = 0
 
+@onready var opened_smoke_fx: AnimatedSprite2D = $OpenedSmokeFX
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_manager.time_control_changed.connect(_on_time_control_changed)
 	starting_move_position = anim_body.position.y
 	
 	$TimerCloseDelay.timeout.connect(_on_timer_timeout)
+	
+	# Offsets smoke fx to be "above" so as to properly display
+	if opened_move_distance < 0:
+		print("shift smoke position")
+		opened_smoke_fx.position.y += opened_move_distance
+		opened_smoke_fx.flip_v = true
+	else:
+		opened_smoke_fx.position.y = 0.0
+	
 	return
 
 
@@ -36,6 +48,8 @@ func _physics_process(delta: float) -> void:
 		if(!prev_fully_open): # if just reached fully open
 			move_speed = close_speed
 			$TimerCloseDelay.start()
+			opened_smoke_fx.speed_scale = speed_map[current_time_control]
+			opened_smoke_fx.play("default")
 		fully_open = true
 	else:
 		fully_open = false
@@ -56,9 +70,12 @@ func _physics_process(delta: float) -> void:
 	anim_body.position.y = move_toward(anim_body.position.y, target_move_position, delta * move_speed * speed_map[current_time_control] )
 	return
 
+
 func _on_timer_timeout():
 	target_move_position = 0.0
 
+
 func _on_time_control_changed(new_time_control: GameManager.TimeControl):
 	current_time_control = new_time_control
+	opened_smoke_fx.speed_scale = speed_map[current_time_control]
 	return
