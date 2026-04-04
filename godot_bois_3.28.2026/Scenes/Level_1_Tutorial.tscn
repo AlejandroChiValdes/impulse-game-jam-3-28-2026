@@ -16,8 +16,8 @@
 [ext_resource type="Script" uid="uid://dytv10810601x" path="res://Scripts/EndGame/end_game.gd" id="12_varqm"]
 [ext_resource type="PackedScene" uid="uid://3k4vwk3t2cco" path="res://Scenes/Props/steampunk_lamp_2.tscn" id="12_w8ekw"]
 [ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="13_w8ekw"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
+[ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
+[ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
 [ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
@@ -497,7 +497,7 @@ connected_object = NodePath("../PressureDoor")
 [node name="PressureDoor" parent="Level Segment 5" unique_id=1183655408 instance=ExtResource("14_q81yf")]
 position = Vector2(6784, -1056)
 
-[node name="TimerCloseDelay" parent="Level Segment 5/PressureDoor" index="1" unique_id=1014801804]
+[node name="TimerCloseDelay" parent="Level Segment 5/PressureDoor" index="2" unique_id=1014801804]
 wait_time = 2.75
 
 [node name="PressurePlate2" parent="Level Segment 5" unique_id=1367247280 node_paths=PackedStringArray("connected_object") instance=ExtResource("15_8pn62")]
@@ -507,7 +507,7 @@ connected_object = NodePath("../PressureDoor2")
 [node name="PressureDoor2" parent="Level Segment 5" unique_id=1456386529 instance=ExtResource("14_q81yf")]
 position = Vector2(7312, -1056)
 
-[node name="TimerCloseDelay" parent="Level Segment 5/PressureDoor2" index="1" unique_id=1014801804]
+[node name="TimerCloseDelay" parent="Level Segment 5/PressureDoor2" index="2" unique_id=1014801804]
 wait_time = 10.0
 
 [node name="PressureDoor3" parent="Level Segment 5" unique_id=1871270801 instance=ExtResource("14_q81yf")]
@@ -572,7 +572,7 @@ tile_set = ExtResource("3_qmo6t")
 [node name="PressureDoor1" parent="Level Segment 6/Right Path Terrain" unique_id=842390203 instance=ExtResource("14_q81yf")]
 position = Vector2(8016, -1120)
 
-[node name="TimerCloseDelay" parent="Level Segment 6/Right Path Terrain/PressureDoor1" index="1" unique_id=1014801804]
+[node name="TimerCloseDelay" parent="Level Segment 6/Right Path Terrain/PressureDoor1" index="2" unique_id=1014801804]
 wait_time = 2.5
 
 [node name="Left Path Terrain" type="TileMapLayer" parent="Level Segment 6" unique_id=988002574]
@@ -587,7 +587,7 @@ connected_object = NodePath("../PressureDoor2")
 [node name="PressureDoor2" parent="Level Segment 6/Left Path Terrain" unique_id=227497338 instance=ExtResource("14_q81yf")]
 position = Vector2(7792, -1296)
 
-[node name="TimerCloseDelay" parent="Level Segment 6/Left Path Terrain/PressureDoor2" index="1" unique_id=1014801804]
+[node name="TimerCloseDelay" parent="Level Segment 6/Left Path Terrain/PressureDoor2" index="2" unique_id=1014801804]
 wait_time = 2.0
 
 [node name="Tracks Column" type="Node2D" parent="Level Segment 6" unique_id=457916460]
@@ -653,18 +653,16 @@ layout_mode = 2
 text = "Level Complete!"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label" unique_id=476574553]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.348
-offset_left = 40.0
-offset_top = 32.0
-offset_right = -42.0
-offset_bottom = 31.995998
+[node name="RestartButton" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=1772546036]
+layout_mode = 2
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=476574553]
+layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/Label/Button" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_button_pressed"]
+[connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/RestartButton" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/ExitButton" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_exit_button_pressed"]
 
 [editable path="Level Segment 1/Lighting/Lamp"]
 [editable path="Level Segment 1/Lighting/Lamp5"]
