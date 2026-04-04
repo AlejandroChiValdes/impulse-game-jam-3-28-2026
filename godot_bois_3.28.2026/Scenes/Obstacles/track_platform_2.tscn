@@ -112,7 +112,7 @@ _data = {
 curve = SubResource("Curve2D_seeld")
 script = ExtResource("1_lwckt")
 animation_scale = 0.5
-ping_pong_delay = 0.15
+base_ping_pong_delay = 0.15
 speed_map = Array[float]([1.0, 2.0, 3.0])
 
 [node name="PlatformFollow" type="PathFollow2D" parent="." unique_id=1535704970]
