@@ -1,7 +1,93 @@
 [gd_scene format=3 uid="uid://c8vcot3dv8c18"]
 
-[ext_resource type="Script" uid="uid://bbf55mu2tirn0" path="res://pressure_door.gd" id="1_eee77"]
+[ext_resource type="Script" uid="uid://bbf55mu2tirn0" path="res://Scripts/Obstacles/pressure_door.gd" id="1_eee77"]
 [ext_resource type="Texture2D" uid="uid://gib4t1j6w47e" path="res://Art/Tilesets/Tiles-door.png" id="2_ihc50"]
+[ext_resource type="Texture2D" uid="uid://cernay6vyrssw" path="res://Art/Sprites/Effects/Smoke Fx  Pixel 05-horizontal-ring.png" id="2_wmtq7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7r2p"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v83y8"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s25iv"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s4bh"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gkd6"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dosrk"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gemp5"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut4d0"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6us8"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_344o2"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybc0b"]
+atlas = ExtResource("2_wmtq7")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bgqq6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7r2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v83y8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s25iv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s4bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gkd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dosrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gemp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut4d0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6us8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_344o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybc0b")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wmtq7"]
 texture = ExtResource("2_ihc50")
@@ -18,6 +104,12 @@ size = Vector2(16, 64)
 script = ExtResource("1_eee77")
 opened_move_distance = 64.0
 speed_map = Array[float]([1.0, 1.5, 2.0])
+
+[node name="OpenedSmokeFX" type="AnimatedSprite2D" parent="." unique_id=1094536317]
+z_index = -1
+position = Vector2(8, 0)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_bgqq6")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1593050698]
 collision_mask = 2
