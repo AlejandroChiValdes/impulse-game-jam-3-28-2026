@@ -14,6 +14,9 @@ var current_move_progress: float = 0.0
 var applying_pressure: bool
 var prev_pressure: bool
 
+var fully_open: bool
+var prev_fully_open: bool
+
 @onready var game_manager = GameManager
 
 @export var speed_map: Array[float]
@@ -29,17 +32,26 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if anim_body.position.y == opened_move_distance:
+		if(!prev_fully_open): # if just reached fully open
+			move_speed = close_speed
+			$TimerCloseDelay.start()
+		fully_open = true
+	else:
+		fully_open = false
+	prev_fully_open = fully_open # update previous state
+		
 	if applying_pressure:
 		# if newly applied pressure
 		if(!prev_pressure):
 			target_move_position = opened_move_distance
 			move_speed = open_speed
-	else:
-		# if newly released pressure
-		if(prev_pressure):
-			$TimerCloseDelay.start()
-			move_speed = close_speed
-	prev_pressure = applying_pressure
+	elif !applying_pressure:
+		if(prev_pressure): # if newly released pressure
+			if fully_open:  		# if door is fully open
+				$TimerCloseDelay.start()
+			
+	prev_pressure = applying_pressure # update previous state
 	
 	anim_body.position.y = move_toward(anim_body.position.y, target_move_position, delta * move_speed * speed_map[current_time_control] )
 	return
