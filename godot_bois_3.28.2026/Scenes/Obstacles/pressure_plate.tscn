@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ddr7v5ismcogk" path="res://Scripts/Obstacles/pressure_plate.gd" id="1_nbaig"]
 [ext_resource type="Texture2D" uid="uid://cruulm8n5ewxe" path="res://Art/Tilesets/AssetPack1.png" id="2_mvdcq"]
+[ext_resource type="Texture2D" uid="uid://cernay6vyrssw" path="res://Art/Sprites/Effects/Smoke Fx  Pixel 05-horizontal-ring.png" id="3_xjryj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xjryj"]
 texture = ExtResource("2_mvdcq")
@@ -66,8 +67,94 @@ texture = ExtResource("2_mvdcq")
 [sub_resource type="TileSet" id="TileSet_ddmnp"]
 sources/0 = SubResource("TileSetAtlasSource_xjryj")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddmnp"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayhu1"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfv2p"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4ok2"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4303y"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krn4j"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri4ti"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70tfy"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olu6i"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kmjf"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqrtp"]
+atlas = ExtResource("3_xjryj")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ajya7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddmnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayhu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfv2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4ok2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4303y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krn4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri4ti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70tfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olu6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kmjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqrtp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
 [node name="PressurePlate" type="Node2D" unique_id=1225841854]
 script = ExtResource("1_nbaig")
+speed_map = Array[float]([1.0, 1.5, 2.0])
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1690416337]
 
@@ -85,6 +172,14 @@ collision_mask = 2
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OverlapPressure" unique_id=287567355]
 position = Vector2(0, 8)
 polygon = PackedVector2Array(-7, -9, 7, -9, 15, 0, -15, 0)
+
+[node name="PressedSmokeFX" type="AnimatedSprite2D" parent="." unique_id=1713148213]
+z_index = -1
+position = Vector2(0, 8.125)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_ajya7")
+frame = 10
+frame_progress = 1.0
 
 [connection signal="body_entered" from="OverlapPressure" to="." method="_on_overlap_pressure_body_entered"]
 [connection signal="body_exited" from="OverlapPressure" to="." method="_on_overlap_pressure_body_exited"]
