@@ -15,11 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://r1w386l1ogm6" path="res://Scenes/Props/steampunk_lamp_1.tscn" id="11_varqm"]
 [ext_resource type="Script" uid="uid://dytv10810601x" path="res://Scripts/EndGame/end_game.gd" id="12_varqm"]
 [ext_resource type="PackedScene" uid="uid://3k4vwk3t2cco" path="res://Scenes/Props/steampunk_lamp_2.tscn" id="12_w8ekw"]
+[ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="13_w8ekw"]
 [ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
 [ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
-[ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
 [ext_resource type="TileSet" uid="uid://dwevn0hkdneoe" path="res://Art/Tilesets/PressureConnections.tres" id="16_gqqus"]
-[ext_resource type="PackedScene" uid="uid://jwoon3caf14n" path="res://Scenes/UI/game_end_ui_canvas.tscn" id="17_otbiy"]
+[ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
@@ -179,6 +179,12 @@ point_count = 2
 [sub_resource type="Curve2D" id="Curve2D_otbiy"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 376, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_tnel1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 583.99994, 0)
 }
 point_count = 2
 
@@ -503,10 +509,10 @@ rotation = -1.5707964
 connected_object = NodePath("../PressureDoor")
 
 [node name="PressureDoor" parent="Level Segment 5" unique_id=1183655408 instance=ExtResource("14_q81yf")]
+z_index = -2
 position = Vector2(6784, -1056)
 
 [node name="TimerCloseDelay" parent="Level Segment 5/PressureDoor" index="2" unique_id=1014801804]
-z_index = -2
 wait_time = 2.75
 
 [node name="PressurePlate2" parent="Level Segment 5" unique_id=1367247280 node_paths=PackedStringArray("connected_object") instance=ExtResource("15_8pn62")]
@@ -639,6 +645,7 @@ wait_time = 2.0
 [node name="TrackPath" parent="Level Segment 6/Tracks Column" unique_id=1058976624 instance=ExtResource("6_gdkr5")]
 position = Vector2(7928, -1352)
 rotation = -1.5707964
+curve = SubResource("Curve2D_tnel1")
 
 [node name="TrackPath2" parent="Level Segment 6/Tracks Column" unique_id=2115612183 instance=ExtResource("6_gdkr5")]
 position = Vector2(7928, -1168)
@@ -654,7 +661,7 @@ curve = SubResource("Curve2D_kt0ie")
 position = Vector2(6680, -1960)
 collision_mask = 3
 script = ExtResource("12_varqm")
-game_over_ui = NodePath("")
+game_over_ui = NodePath("../CanvasLayer/GameEndUICanvas")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level Segment 6/Area2D" unique_id=1286381126]
 position = Vector2(1248, 0)
@@ -667,14 +674,21 @@ GameTimer = NodePath("../../../GameTimer")
 
 [node name="GameEndUICanvas" type="Control" parent="Level Segment 6/CanvasLayer" unique_id=275161265]
 unique_name_in_owner = true
-offset_left = 33.0
-offset_top = 1315.0
-offset_right = 33.0
-offset_bottom = 1315.0
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_w8ekw")
 
-[node name="PressureConnections" type="TileMapLayer" parent="Level Segment 6" unique_id=1633986158]
-tile_map_data = PackedByteArray("AADsAcT/AAAAAAEAAFDtAcT/AAAAAAEAAFDuAcT/AAAAAAEAAFDvAcT/AAAAAAEAAFDwAcT/AAAAAAEAAFDxAcT/AAAAAAEAAFDyAcT/AAAAAAEAAFDzAcT/AAAAAAEAAFD0AcT/AAAAAAEAAFD1AcT/AAAAAAEAAFD3AcP/AAAAAAEAAAD3AcL/AAAAAAEAAAD3AcH/AAAAAAEAAAD3AcD/AAAAAAEAAAD3Ab//AAAAAAEAAAD3Ab7/AAAAAAEAAAD3Ab3/AAAAAAEAAAD2AcT/AAAAAAEAAFDoAbn/AAAAAAEAAGDnAbn/AAAAAAEAAGDmAbj/AAAAAAEAAADmAbf/AAAAAAEAAADmAbb/AAAAAAEAAADmAbX/AAAAAAEAAADmAbT/AAAAAAEAAADmAbP/AAAAAAEAAADmAbL/AAAAAAEAAADmAbn/AAAAAAAAAGDpAbn/AAAAAAAAADDrAcT/AAAAAAAAAGD3AcT/AAAAAAAAADA=")
-tile_set = ExtResource("16_gqqus")
+[node name="Panel" type="Panel" parent="Level Segment 6/CanvasLayer/GameEndUICanvas" unique_id=1750615014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel" unique_id=1916841189]
 layout_mode = 1
@@ -697,6 +711,10 @@ text = "Restart"
 [node name="ExitButton" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=476574553]
 layout_mode = 2
 text = "Exit"
+
+[node name="PressureConnections" type="TileMapLayer" parent="Level Segment 6" unique_id=1633986158]
+tile_map_data = PackedByteArray("AADsAcT/AAAAAAEAAFDtAcT/AAAAAAEAAFDuAcT/AAAAAAEAAFDvAcT/AAAAAAEAAFDwAcT/AAAAAAEAAFDxAcT/AAAAAAEAAFDyAcT/AAAAAAEAAFDzAcT/AAAAAAEAAFD0AcT/AAAAAAEAAFD1AcT/AAAAAAEAAFD3AcP/AAAAAAEAAAD3AcL/AAAAAAEAAAD3AcH/AAAAAAEAAAD3AcD/AAAAAAEAAAD3Ab//AAAAAAEAAAD3Ab7/AAAAAAEAAAD3Ab3/AAAAAAEAAAD2AcT/AAAAAAEAAFDoAbn/AAAAAAEAAGDnAbn/AAAAAAEAAGDmAbj/AAAAAAEAAADmAbf/AAAAAAEAAADmAbb/AAAAAAEAAADmAbX/AAAAAAEAAADmAbT/AAAAAAEAAADmAbP/AAAAAAEAAADmAbL/AAAAAAEAAADmAbn/AAAAAAAAAGDpAbn/AAAAAAAAADDrAcT/AAAAAAAAAGD3AcT/AAAAAAAAADA=")
+tile_set = ExtResource("16_gqqus")
 
 [connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/RestartButton" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/ExitButton" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_exit_button_pressed"]
