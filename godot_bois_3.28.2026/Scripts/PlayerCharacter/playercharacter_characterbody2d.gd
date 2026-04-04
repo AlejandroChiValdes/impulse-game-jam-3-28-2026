@@ -12,6 +12,12 @@ var GOD_MODE_SPEED_MULT = 3
 @export var TO_STANDSTILL_FORCE_FLOOR = 10.0
 @export var TO_STANDSTILL_FORCE_MIDAIR = 10.0
 
+@onready var smoke_fx: AnimatedSprite2D = $TimeSmokeFX
+@onready var time_light_fx: AnimatedSprite2D = $TimeLightFX
+@onready var head_color: AnimatedSprite2D = $AnimatedHeadSprite/HeadColor
+@export var head_color_map: Dictionary[GameManager.TimeControl, Color]
+
+
 var TIME_CONTROL_MULTIPLIER : float = 1.0
 @export var speed_map : Dictionary[GameManager.TimeControl, float] = {
 	GameManager.TimeControl.NORMAL : 1.0,
@@ -20,6 +26,15 @@ var TIME_CONTROL_MULTIPLIER : float = 1.0
 }
 
 func handle_time_control_changed(new_time_control : GameManager.TimeControl):
+	if smoke_fx.is_playing() or time_light_fx.is_playing():
+		smoke_fx.stop()
+		time_light_fx.stop()
+
+	smoke_fx.play("default")
+	time_light_fx.play("default")
+	head_color.self_modulate = head_color_map[new_time_control]
+	head_color.play("default")
+
 	TIME_CONTROL_MULTIPLIER = speed_map[new_time_control]
 	_animated_head_sprite.set_speed_scale(speed_map[new_time_control])
 	
