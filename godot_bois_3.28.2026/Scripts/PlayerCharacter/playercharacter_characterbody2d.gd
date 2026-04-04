@@ -17,13 +17,16 @@ var GOD_MODE_SPEED_MULT = 3
 @onready var head_color: AnimatedSprite2D = $AnimatedHeadSprite/HeadColor
 @export var head_color_map: Dictionary[GameManager.TimeControl, Color]
 
-
 var TIME_CONTROL_MULTIPLIER : float = 1.0
 @export var speed_map : Dictionary[GameManager.TimeControl, float] = {
 	GameManager.TimeControl.NORMAL : 1.0,
 	GameManager.TimeControl.FAST : 2.0,
 	GameManager.TimeControl.FASTEST : 3.0
 }
+
+#Used to kick off in-game timer
+var has_player_moved : bool = false
+signal player_started_moving
 
 func handle_time_control_changed(new_time_control : GameManager.TimeControl):
 	if smoke_fx.is_playing() or time_light_fx.is_playing():
@@ -107,6 +110,11 @@ var IS_RUNNING = false
 var POPPED_JUMPING_HEAD = false
 var POPPED_JUMPING_HEAD_MAGNITUDE = 0.0
 func _process(delta: float):
+	#Note: May need to make a custom function to check if any "movement" inputs have been pressed,
+	#as currently any single mouse movement or keystroke will start the timer.
+	if !has_player_moved && is_movement_input_pressed():
+		player_started_moving.emit()
+		has_player_moved = true
 	# God Mode toggles collision and physics
 	if Input.is_action_just_pressed("God Mode"):
 		GOD_MODE = !GOD_MODE
@@ -157,6 +165,9 @@ func _process(delta: float):
 		_animated_body_sprite.flip_h = false
 	else:
 		_animated_body_sprite.play("default")
+
+func is_movement_input_pressed():
+	return Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right") || Input.is_action_pressed("jump")
 	
 func debug_evaluate_collisions():
 	var collision_count = get_slide_collision_count()

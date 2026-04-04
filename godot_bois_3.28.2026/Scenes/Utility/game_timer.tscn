@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dmuwwv6vvpm8m"]
+
+[ext_resource type="Script" uid="uid://bs24tco5yht3r" path="res://Scripts/Utility/game_timer.gd" id="1_tfemd"]
+
+[node name="GameTimer" type="Node2D" unique_id=678673295]
+script = ExtResource("1_tfemd")
