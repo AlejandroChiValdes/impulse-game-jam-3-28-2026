@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://etlpsrwvd2rf"]
 
+[ext_resource type="PackedScene" uid="uid://dmuwwv6vvpm8m" path="res://Scenes/Utility/game_timer.tscn" id="1_tnel1"]
 [ext_resource type="PackedScene" uid="uid://vrnwhe3u24vr" path="res://Scenes/PlayerCharacter.tscn" id="2_bly3n"]
 [ext_resource type="AudioStream" uid="uid://yyhu3hfpdq50" path="res://Audio/Music/GameJamSlow.mp3" id="3_jw2gy"]
 [ext_resource type="TileSet" uid="uid://dap5t8t8yllk7" path="res://Art/Tilesets/AssetPack1.tres" id="3_qmo6t"]
@@ -15,8 +16,9 @@
 [ext_resource type="Script" uid="uid://dytv10810601x" path="res://Scripts/EndGame/end_game.gd" id="12_varqm"]
 [ext_resource type="PackedScene" uid="uid://3k4vwk3t2cco" path="res://Scenes/Props/steampunk_lamp_2.tscn" id="12_w8ekw"]
 [ext_resource type="Script" uid="uid://b7xg3waoud4qp" path="res://Scripts/EndGame/exit_script.gd" id="13_w8ekw"]
-[ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
-[ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
+[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
+[ext_resource type="PackedScene" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
+[ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
@@ -189,6 +191,9 @@ point_count = 2
 
 [node name="Level1Tutorial" type="Node2D" unique_id=1489204597]
 metadata/_edit_horizontal_guides_ = [-192.0, -200.0]
+
+[node name="GameTimer" parent="." unique_id=678673295 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("1_tnel1")]
+PlayerCharacter = NodePath("../Level Segment 1/CharacterBody2D")
 
 [node name="Level Segment 1" type="Node2D" parent="." unique_id=868807960]
 
@@ -612,6 +617,9 @@ position = Vector2(1250, 354)
 shape = SubResource("RectangleShape2D_4g0rk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Level Segment 6" unique_id=678163774]
+
+[node name="Control" parent="Level Segment 6/CanvasLayer" unique_id=399532159 node_paths=PackedStringArray("GameTimer") instance=ExtResource("20_qmo6t")]
+GameTimer = NodePath("../../../GameTimer")
 
 [node name="GameEndUICanvas" type="Control" parent="Level Segment 6/CanvasLayer" unique_id=275161265]
 unique_name_in_owner = true
