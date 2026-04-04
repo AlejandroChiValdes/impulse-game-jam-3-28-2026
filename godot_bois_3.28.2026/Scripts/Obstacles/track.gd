@@ -13,9 +13,6 @@ var current_speed_type: GameManager.TimeControl = 0
 @onready var game_manager = GameManager
 
 var start_delay: bool = false
-#var shifted_delay_timer: float = 0.0
-#var shifted_ping_pong_delay: float
-
 var base_delay_timer: float = 0.0
 
 @onready var track_follow: PathFollow2D = $PlatformFollow
@@ -23,6 +20,10 @@ var animation_name = "moving_platform"
 var is_playback_reversed: bool = false
 
 var animation_playback_rate: float
+
+@onready var stop_smoke_l: AnimatedSprite2D = $PlatformFollow/AnimatableBody2D/StopSmokeL
+@onready var stop_smoke_r: AnimatedSprite2D = $PlatformFollow/AnimatableBody2D/StopSmokeR
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,6 +67,9 @@ func _physics_process(delta: float) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == animation_name:
 		is_playback_reversed = not is_playback_reversed
+		stop_smoke_l.play("default")
+		stop_smoke_r.play("default")
+		
 		if base_ping_pong_delay > 0.0:
 			start_delay = true
 	return
@@ -73,6 +77,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_time_control_changed(new_time_control: GameManager.TimeControl):
 	current_speed_type = new_time_control
+	stop_smoke_l.speed_scale = speed_map[current_speed_type]
+	stop_smoke_r.speed_scale = speed_map[current_speed_type]
 	return
 
 
