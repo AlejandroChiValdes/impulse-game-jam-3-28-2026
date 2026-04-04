@@ -52,6 +52,7 @@ func _ready() -> void:
 var INT_MAX = 9223372036854775806
 var FRAMES_SINCE_JUMPED = INT_MAX
 @export var INPUT_BUFFER_FRAMES = 15
+var HAS_BURNED_WALL_JUMP : bool = false
 func _physics_process(delta: float):
 	#always apply gravity, unconditional of any user input or horizontal momentum.a
 	velocity.y += GRAVITY * delta * TIME_CONTROL_MULTIPLIER * float(!GOD_MODE)
@@ -60,17 +61,20 @@ func _physics_process(delta: float):
 	var IsInMidair = get_slide_collision_count() == 0
 	var TimeControlForceMultiplier = sqrt(TIME_CONTROL_MULTIPLIER)
 	
+	if IsOnFloor && HAS_BURNED_WALL_JUMP:
+		HAS_BURNED_WALL_JUMP = false
 	update_input_buffer_values()
 	var DidJump = false
 	if Input.is_action_just_pressed("jump") || FRAMES_SINCE_JUMPED <= INPUT_BUFFER_FRAMES:
 		print("Frames since jumped: ", FRAMES_SINCE_JUMPED)
 		print("INPUT_BUFFER_FRAMES: ", INPUT_BUFFER_FRAMES)
-		if IsOnFloor: #also need a check for if the player is on the floor.
+		if IsOnFloor:
 			velocity.y = -1 * JUMP_FORCE_Y * TimeControlForceMultiplier
 			DidJump = true
-		elif is_on_wall():
+		elif is_on_wall() && !HAS_BURNED_WALL_JUMP:
 			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TimeControlForceMultiplier
 			velocity.y = -1 * JUMP_FORCE_Y_WALL * TimeControlForceMultiplier
+			HAS_BURNED_WALL_JUMP = true
 			DidJump = true
 	if DidJump:
 		FRAMES_SINCE_JUMPED = INT_MAX
