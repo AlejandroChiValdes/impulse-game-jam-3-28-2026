@@ -673,7 +673,7 @@ shape = SubResource("RectangleShape2D_4g0rk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Level Segment 6" unique_id=678163774]
 
-[node name="Control" parent="Level Segment 6/CanvasLayer" unique_id=399532159 node_paths=PackedStringArray("GameTimer") instance=ExtResource("20_qmo6t")]
+[node name="GameTimerLabel" parent="Level Segment 6/CanvasLayer" unique_id=399532159 node_paths=PackedStringArray("GameTimer") instance=ExtResource("20_qmo6t")]
 GameTimer = NodePath("../../../GameTimer")
 
 [node name="GameEndUICanvas" type="Control" parent="Level Segment 6/CanvasLayer" unique_id=275161265 node_paths=PackedStringArray("GameTimer")]

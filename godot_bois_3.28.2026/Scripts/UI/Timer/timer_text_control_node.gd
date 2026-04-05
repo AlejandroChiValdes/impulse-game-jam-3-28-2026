@@ -6,5 +6,5 @@ func _ready():
 	GameTimer.game_timer_updated.connect(_on_game_timer_updated)
 
 func _on_game_timer_updated(new_time : float):
-	$RichTextLabel.show_new_time(new_time)
+	$MarginContainer/RichTextLabel.show_new_time(new_time)
 	return
