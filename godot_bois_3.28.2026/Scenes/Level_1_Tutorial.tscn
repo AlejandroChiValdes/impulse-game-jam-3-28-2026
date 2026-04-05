@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c8vcot3dv8c18" path="res://Scenes/Obstacles/pressure_door.tscn" id="14_q81yf"]
 [ext_resource type="PackedScene" uid="uid://ck6hdnk3kee0m" path="res://Scenes/Obstacles/pressure_plate.tscn" id="15_8pn62"]
 [ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
+[ext_resource type="PackedScene" uid="uid://bd0veu5pf820k" path="res://Scenes/UI/pause_menu.tscn" id="20_tnel1"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
@@ -623,6 +624,7 @@ GameTimer = NodePath("../../../GameTimer")
 
 [node name="GameEndUICanvas" type="Control" parent="Level Segment 6/CanvasLayer" unique_id=275161265]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -660,6 +662,9 @@ text = "Restart"
 [node name="ExitButton" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=476574553]
 layout_mode = 2
 text = "Exit"
+
+[node name="PauseMenu" parent="Level Segment 6/CanvasLayer" unique_id=1292611825 instance=ExtResource("20_tnel1")]
+visible = false
 
 [connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/RestartButton" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer/ExitButton" to="Level Segment 6/CanvasLayer/GameEndUICanvas" method="_on_exit_button_pressed"]

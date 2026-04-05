@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bd0veu5pf820k"]
+
+[ext_resource type="Script" uid="uid://bc82xvysg5arh" path="res://Scripts/UI/PauseMenu/pause_menu.gd" id="1_oykix"]
+[ext_resource type="Script" uid="uid://gq803er4o0sl" path="res://Scripts/UI/PauseMenu/restart.gd" id="1_r2i2h"]
+[ext_resource type="Script" uid="uid://w1iur28vkypy" path="res://Scripts/UI/PauseMenu/main_menu.gd" id="2_oykix"]
+[ext_resource type="Script" uid="uid://ddyth68kggrqk" path="res://Scripts/UI/PauseMenu/quit.gd" id="3_kdnb7"]
+
+[node name="PauseMenu" type="Control" unique_id=1292611825]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oykix")
+
+[node name="Panel" type="Panel" parent="." unique_id=217059628]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1763123795]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -160.0
+offset_right = 345.5
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1253497198]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "P(OG)SED"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="Panel/VBoxContainer" unique_id=1791862012]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+script = ExtResource("1_r2i2h")
+
+[node name="Main Menu" type="Button" parent="Panel/VBoxContainer" unique_id=1308543844]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+script = ExtResource("2_oykix")
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=102431254]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+script = ExtResource("3_kdnb7")
