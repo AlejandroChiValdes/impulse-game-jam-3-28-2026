@@ -57,12 +57,16 @@ grow_vertical = 2
 
 [node name="Play" type="Button" parent="CanvasLayer/MainMenu/Panel/VBoxContainer" unique_id=1107509970]
 layout_mode = 2
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Quit")
 theme_override_font_sizes/font_size = 30
 text = "Play"
 script = ExtResource("1_mjmdf")
 
 [node name="Quit" type="Button" parent="CanvasLayer/MainMenu/Panel/VBoxContainer" unique_id=1064857639]
 layout_mode = 2
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Play")
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 script = ExtResource("2_72sra")

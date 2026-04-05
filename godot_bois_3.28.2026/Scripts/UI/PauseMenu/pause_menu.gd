@@ -13,6 +13,7 @@ func _input(event: InputEvent):
 
 func open():
 	get_tree().paused = true
+	$Panel/VBoxContainer/Restart.grab_focus()
 	show()
 
 func close():
