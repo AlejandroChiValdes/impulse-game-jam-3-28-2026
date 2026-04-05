@@ -21,6 +21,7 @@
 [ext_resource type="TileSet" uid="uid://dwevn0hkdneoe" path="res://Art/Tilesets/PressureConnections.tres" id="16_gqqus"]
 [ext_resource type="PackedScene" uid="uid://sl7vh7fe4qnr" path="res://Scenes/UI/game_timer_label.tscn" id="20_qmo6t"]
 [ext_resource type="PackedScene" uid="uid://bd0veu5pf820k" path="res://Scenes/UI/pause_menu.tscn" id="20_tnel1"]
+[ext_resource type="Script" uid="uid://vxuddj5imo3l" path="res://Scenes/GameEndUI_ElapsedTime.gd" id="21_acvo0"]
 
 [sub_resource type="Animation" id="Animation_4v0sk"]
 length = 0.001
@@ -675,9 +676,8 @@ shape = SubResource("RectangleShape2D_4g0rk")
 [node name="Control" parent="Level Segment 6/CanvasLayer" unique_id=399532159 node_paths=PackedStringArray("GameTimer") instance=ExtResource("20_qmo6t")]
 GameTimer = NodePath("../../../GameTimer")
 
-[node name="GameEndUICanvas" type="Control" parent="Level Segment 6/CanvasLayer" unique_id=275161265]
+[node name="GameEndUICanvas" type="Control" parent="Level Segment 6/CanvasLayer" unique_id=275161265 node_paths=PackedStringArray("GameTimer")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -685,6 +685,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_w8ekw")
+GameTimer = NodePath("../../../GameTimer")
 
 [node name="Panel" type="Panel" parent="Level Segment 6/CanvasLayer/GameEndUICanvas" unique_id=1750615014]
 layout_mode = 1
@@ -705,15 +706,29 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=669701582]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Level Complete!"
 horizontal_alignment = 1
 
+[node name="ElapsedTimeLabel" type="RichTextLabel" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=1406935671]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("21_acvo0")
+
 [node name="RestartButton" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=1772546036]
 layout_mode = 2
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../ExitButton")
+theme_override_font_sizes/font_size = 30
 text = "Restart"
 
 [node name="ExitButton" type="Button" parent="Level Segment 6/CanvasLayer/GameEndUICanvas/Panel/VBoxContainer" unique_id=476574553]
 layout_mode = 2
+focus_next = NodePath("../RestartButton")
+focus_previous = NodePath("../RestartButton")
+theme_override_font_sizes/font_size = 30
 text = "Exit"
 
 [node name="PauseMenu" parent="Level Segment 6/CanvasLayer" unique_id=1292611825 instance=ExtResource("20_tnel1")]
