@@ -48,6 +48,15 @@ func _ready() -> void:
 	_animated_head_sprite.play("default")
 	GameManager.time_control_changed.connect(handle_time_control_changed)
 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("restart"):
+		# if not normal time shifted during a restart, down shift until normal
+		while GameManager.CURRENT_TIME_CONTROL != GameManager.TimeControl.NORMAL:
+			GameManager.time_control_slow_down.emit()
+		get_tree().reload_current_scene()
+	return
+
 #Initialize at INT_MAX and replace at player's first jump input.
 var INT_MAX = 9223372036854775806
 var FRAMES_SINCE_JUMPED = INT_MAX
