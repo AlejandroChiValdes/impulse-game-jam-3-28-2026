@@ -39,7 +39,7 @@ grow_vertical = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1253497198]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
-text = "P(OG)SED"
+text = "PAUSED"
 fit_content = true
 horizontal_alignment = 1
 
