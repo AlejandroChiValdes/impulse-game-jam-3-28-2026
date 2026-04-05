@@ -52,8 +52,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		# if not normal time shifted during a restart, down shift until normal
-		while GameManager.CURRENT_TIME_CONTROL != GameManager.TimeControl.NORMAL:
-			GameManager.time_control_slow_down.emit()
+		GameManager.reset_level.emit()
 		get_tree().reload_current_scene()
 	return
 
