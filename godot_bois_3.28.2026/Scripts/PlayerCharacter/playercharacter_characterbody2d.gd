@@ -148,6 +148,8 @@ func _process(delta: float):
 		has_player_moved = true
 	# God Mode toggles collision and physics
 	if Input.is_action_just_pressed("God Mode"):
+		if !OS.is_debug_build() && !OS.has_feature("enable_god_mode"):
+			return
 		GOD_MODE = !GOD_MODE
 		get_node("CollisionShape2D").disabled = !get_node("CollisionShape2D").disabled
 			
