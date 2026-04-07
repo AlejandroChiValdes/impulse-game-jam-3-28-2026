@@ -12,13 +12,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_ncbi2")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=459197590]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=143170238]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 20
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=459197590]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
 horizontal_alignment = 2
 script = ExtResource("2_emux4")

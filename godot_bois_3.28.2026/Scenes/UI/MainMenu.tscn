@@ -1,10 +1,86 @@
 [gd_scene format=3 uid="uid://dwuhmxt5045b2"]
 
 [ext_resource type="Script" uid="uid://cix40g5mfbvwb" path="res://Scripts/UI/MainMenu/main_menu.gd" id="1_72sra"]
+[ext_resource type="PackedScene" uid="uid://d0dr7q0stjakx" path="res://Scenes/PlayerCharacterMainMenuSprite.tscn" id="1_jex3y"]
 [ext_resource type="Script" uid="uid://q2hi85nfoyoo" path="res://Scripts/UI/MainMenu/play.gd" id="1_mjmdf"]
 [ext_resource type="Script" uid="uid://ddyth68kggrqk" path="res://Scripts/UI/PauseMenu/quit.gd" id="2_72sra"]
+[ext_resource type="Texture2D" uid="uid://crlkbg7tn7t25" path="res://Art/Sprites/BackgroundArt/Gear 3 - Bronze_spritesheet.png" id="4_k8um8"]
+[ext_resource type="Texture2D" uid="uid://b3uqg00wn0tq6" path="res://Art/Sprites/BackgroundArt/Gear 9 - Bronze_spritesheet.png" id="5_jex3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g0rk"]
+atlas = ExtResource("4_k8um8")
+region = Rect2(0, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_varqm"]
+atlas = ExtResource("4_k8um8")
+region = Rect2(43, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8ekw"]
+atlas = ExtResource("4_k8um8")
+region = Rect2(86, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shuh7"]
+atlas = ExtResource("4_k8um8")
+region = Rect2(129, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q81yf"]
+atlas = ExtResource("5_jex3y")
+region = Rect2(0, 0, 59, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pn62"]
+atlas = ExtResource("5_jex3y")
+region = Rect2(59, 0, 59, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otbiy"]
+atlas = ExtResource("5_jex3y")
+region = Rect2(118, 0, 59, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqqus"]
+atlas = ExtResource("5_jex3y")
+region = Rect2(177, 0, 59, 59)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_744d7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g0rk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_varqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8ekw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shuh7")
+}],
+"loop": true,
+"name": &"Gear 3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q81yf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pn62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otbiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqqus")
+}],
+"loop": true,
+"name": &"Gear 9",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D" unique_id=565046997]
+
+[node name="CharacterSprite" parent="." unique_id=1788351071 instance=ExtResource("1_jex3y")]
+position = Vector2(917, 613.00006)
+scale = Vector2(20, 20)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=601248936]
 
@@ -70,3 +146,19 @@ focus_previous = NodePath("../Play")
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 script = ExtResource("2_72sra")
+
+[node name="BronzeGear1" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=1032281765]
+z_index = -1
+position = Vector2(-4.4999886, 53.500008)
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_744d7")
+animation = &"Gear 9"
+autoplay = "Gear 9"
+
+[node name="BronzeGear2" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=198798406]
+z_index = -1
+position = Vector2(325.5, -8.500002)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_744d7")
+animation = &"Gear 9"
+autoplay = "Gear 9"

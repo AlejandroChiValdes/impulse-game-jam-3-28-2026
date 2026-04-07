@@ -8,4 +8,4 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		get_tree().paused = true
-		game_over_ui.visible = true
+		game_over_ui.open()
