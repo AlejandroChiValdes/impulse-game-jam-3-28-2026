@@ -203,6 +203,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0rk"]
+size = Vector2(112, 20)
 
 [node name="Level1Tutorial" type="Node2D" unique_id=1489204597]
 metadata/_edit_horizontal_guides_ = [-192.0, -200.0]
@@ -647,22 +648,23 @@ wait_time = 2.0
 [node name="Tracks Column" type="Node2D" parent="Level Segment 6" unique_id=457916460]
 
 [node name="TrackPath" parent="Level Segment 6/Tracks Column" unique_id=1058976624 instance=ExtResource("6_gdkr5")]
-position = Vector2(7936, -1352)
+position = Vector2(7928, -1352)
 rotation = -1.5707964
 curve = SubResource("Curve2D_tnel1")
 
 [node name="TrackPath2" parent="Level Segment 6/Tracks Column" unique_id=2115612183 instance=ExtResource("6_gdkr5")]
-position = Vector2(7936, -1168)
+position = Vector2(7928, -1168)
 rotation = -1.5707964
 curve = SubResource("Curve2D_cxnse")
 
 [node name="TrackPath3" parent="Level Segment 6/Tracks Column" unique_id=1537716806 instance=ExtResource("6_gdkr5")]
-position = Vector2(7952, -1104)
+position = Vector2(7944, -1104)
 rotation = 1.5707964
 curve = SubResource("Curve2D_kt0ie")
 
 [node name="TrackRods" type="TileMapLayer" parent="Level Segment 6/Tracks Column" unique_id=1672053729]
 z_index = -1
+position = Vector2(-8, 0)
 tile_map_data = PackedByteArray("AADwAbz/AAAGAAUAAADwAbv/AAAGAAUAAADwAbr/AAAGAAUAAADwAbn/AAAGAAUAAADwAb3/AAAGAAQAADDwAbj/AAAGAAQAAADwAbf/AAAGAAQAADDwAa3/AAAGAAQAAADwAbb/AAAGAAUAAADwAbX/AAAGAAUAAADwAbT/AAAGAAUAAADwAbP/AAAGAAUAAADwAbL/AAAGAAUAAADwAbH/AAAGAAUAAADwAbD/AAAGAAUAAADwAa//AAAGAAUAAADwAa7/AAAGAAUAAADwAaz/AAAGAAQAADDwAav/AAAGAAUAAADwAar/AAAGAAUAAADwAan/AAAGAAUAAADwAaj/AAAGAAUAAADwAaf/AAAGAAUAAADwAab/AAAGAAUAAADwAaX/AAAGAAUAAADwAaT/AAAGAAUAAADwAaP/AAAGAAUAAADwAaL/AAAGAAUAAADwAaH/AAAGAAUAAADwAaD/AAAGAAUAAADwAZ//AAAGAAUAAADwAZ7/AAAGAAUAAADwAZ3/AAAGAAUAAADwAZz/AAAGAAUAAADwAZv/AAAGAAUAAADwAZr/AAAGAAUAAADwAZn/AAAGAAUAAADwAZj/AAAGAAUAAADwAZf/AAAGAAUAAADwAZb/AAAGAAUAAADwAZX/AAAGAAUAAADwAZT/AAAGAAUAAADwAZP/AAAGAAUAAADwAZL/AAAGAAUAAADwAZH/AAAGAAUAAADwAZD/AAAGAAUAAADwAY//AAAGAAUAAADwAY7/AAAGAAUAAADwAY3/AAAGAAUAAADwAYz/AAAGAAUAAADwAYv/AAAGAAUAAADwAYr/AAAGAAUAAADwAYn/AAAGAAUAAADwAYj/AAAGAAUAAADwAYf/AAAGAAUAAADwAYb/AAAGAAUAAADwAYX/AAAGAAUAAADwAYT/AAAGAAUAAADwAYP/AAAGAAUAAADwAYL/AAAGAAUAAADwAYH/AAAGAAUAAADwAYD/AAAGAAUAAADwAX//AAAGAAUAAADwAX7/AAAGAAUAAADwAX3/AAAGAAUAAADwAXz/AAAGAAUAAADwAXv/AAAGAAUAAADwAXr/AAAGAAUAAADwAXn/AAAGAAUAAADwAXj/AAAGAAUAAADwAXf/AAAGAAUAAADwAXb/AAAGAAUAAADwAXX/AAAGAAUAAADwAXT/AAAGAAUAAADwAXP/AAAGAAUAAADwAXL/AAAGAAUAAADwAXH/AAAGAAUAAAA=")
 tile_set = ExtResource("3_qmo6t")
 
