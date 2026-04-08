@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://c2jxgs81yhw1g" path="res://Scripts/PlayerCharacter/playercharacter_characterbody2d.gd" id="1_v7sut"]
 [ext_resource type="SpriteFrames" uid="uid://dc78jstysl86o" path="res://Art/Sprites/PlayerCharacter/Tocks-body-anim.tres" id="2_2getf"]
 [ext_resource type="SpriteFrames" uid="uid://cqgbu8kbs8uxo" path="res://Art/Sprites/PlayerCharacter/Tocks-head-anim.tres" id="2_mdaju"]
+[ext_resource type="AudioStream" uid="uid://4vviol8rfclr" path="res://Audio/SFX/Sfx_Run_1.wav" id="2_qg2eu"]
+[ext_resource type="AudioStream" uid="uid://cj55yvbnfmxwn" path="res://Audio/SFX/Sfx_Run_2.wav" id="3_lxmjj"]
+[ext_resource type="AudioStream" uid="uid://beuwqxnkrhy0s" path="res://Audio/SFX/Sfx_Jump.wav" id="4_uk32v"]
+[ext_resource type="AudioStream" uid="uid://cmj5n03l3xuhl" path="res://Audio/SFX/Sfx_Walljump.wav" id="5_otte4"]
 [ext_resource type="Texture2D" uid="uid://c0yd2ifdo8tdq" path="res://Art/Sprites/Effects/Smoke Fx  Pixel 07-vertical-swirl.png" id="5_r4x55"]
 [ext_resource type="Texture2D" uid="uid://dj8nxb0xak86n" path="res://Art/Sprites/Props/Light/Light_5/5-0.png" id="6_cl0yw"]
 [ext_resource type="Texture2D" uid="uid://dyxn3h57e2y6k" path="res://Art/Sprites/Props/Light/Light_5/5-1.png" id="7_vjvuw"]
@@ -222,6 +226,10 @@ collision_layer = 2
 script = ExtResource("1_v7sut")
 RUN_SPEED = 150.0
 DIRECTION_CHANGE_FORCE_FLOOR = 10.0
+sfx_footstep_1 = ExtResource("2_qg2eu")
+sfx_footstep_2 = ExtResource("3_lxmjj")
+sfx_jump = ExtResource("4_uk32v")
+sfx_walljump = ExtResource("5_otte4")
 head_color_map = Dictionary[int, Color]({
 0: Color(1, 1, 1, 0),
 1: Color(1, 0.5294118, 0, 0.3529412),
@@ -249,8 +257,10 @@ sprite_frames = SubResource("SpriteFrames_nufml")
 frame_progress = 0.8105448
 
 [node name="AnimatedBodySprite" type="AnimatedSprite2D" parent="." unique_id=1910808227]
+unique_name_in_owner = true
 position = Vector2(0, -1)
 sprite_frames = ExtResource("2_2getf")
+animation = &"running"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=792134583]
 position = Vector2(0, -1)
@@ -269,3 +279,10 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_0eqq0")
 frame = 15
 frame_progress = 1.0
+
+[node name="SfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=439564156]
+unique_name_in_owner = true
+volume_db = -5.0
+bus = &"SFX"
+
+[connection signal="frame_changed" from="AnimatedBodySprite" to="." method="_on_animated_body_sprite_frame_changed"]

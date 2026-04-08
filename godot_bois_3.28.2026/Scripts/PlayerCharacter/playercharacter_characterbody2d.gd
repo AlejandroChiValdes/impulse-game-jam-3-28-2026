@@ -12,6 +12,11 @@ var GOD_MODE_SPEED_MULT = 3
 @export var TO_STANDSTILL_FORCE_FLOOR = 10.0
 @export var TO_STANDSTILL_FORCE_MIDAIR = 10.0
 
+@export var sfx_footstep_1 = AudioStream
+@export var sfx_footstep_2 = AudioStream
+@export var sfx_jump = AudioStream
+@export var sfx_walljump = AudioStream
+
 @onready var smoke_fx: AnimatedSprite2D = $TimeSmokeFX
 @onready var time_light_fx: AnimatedSprite2D = $TimeLightFX
 @onready var head_color: AnimatedSprite2D = $AnimatedHeadSprite/HeadColor
@@ -88,11 +93,15 @@ func _physics_process(delta: float):
 		if IsOnFloor:
 			velocity.y = -1 * JUMP_FORCE_Y * TimeControlForceMultiplier
 			DidJump = true
+			load_sfx(sfx_jump)
+			%SfxPlayer.play()
 			# player only gets coyote jump if they leave the ground without jumping.
 			HAS_BURNED_COYOTE_JUMP = true
 		elif is_on_wall() && !HAS_BURNED_WALL_JUMP:
 			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TimeControlForceMultiplier
 			velocity.y = -1 * JUMP_FORCE_Y_WALL * TimeControlForceMultiplier
+			load_sfx(sfx_walljump)
+			%SfxPlayer.play()
 			HAS_BURNED_WALL_JUMP = true
 			DidJump = true
 	if Input.is_action_just_pressed("jump") && IsInMidair && !HAS_BURNED_COYOTE_JUMP:
@@ -102,6 +111,8 @@ func _physics_process(delta: float):
 				ELAPSED_COYOTE_TIME_SECONDS = 0
 				HAS_BURNED_COYOTE_JUMP = true
 				DidJump = true
+				load_sfx(sfx_jump)
+				%SfxPlayer.play()
 				
 	if DidJump:
 		FRAMES_SINCE_JUMPED = INT_MAX
@@ -214,3 +225,17 @@ func get_god_mode_speed_mult(is_god_mode: bool):
 		return GOD_MODE_SPEED_MULT
 	else:
 		return 1
+
+func load_sfx(sfx_to_load):
+	if %SfxPlayer.stream != sfx_to_load:
+		%SfxPlayer.stop()
+		%SfxPlayer.stream = sfx_to_load
+
+func _on_animated_body_sprite_frame_changed() -> void:
+	if %AnimatedBodySprite.animation == "running":
+		if %AnimatedBodySprite.frame == 0: 
+			load_sfx(sfx_footstep_1)
+			%SfxPlayer.play()
+		if %AnimatedBodySprite.frame == 2: 
+			load_sfx(sfx_footstep_2)
+			%SfxPlayer.play()
