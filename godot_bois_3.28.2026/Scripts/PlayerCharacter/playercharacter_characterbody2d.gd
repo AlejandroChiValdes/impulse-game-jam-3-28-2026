@@ -16,11 +16,21 @@ var GOD_MODE_SPEED_MULT = 3
 @export var sfx_footstep_2 = AudioStream
 @export var sfx_jump = AudioStream
 @export var sfx_walljump = AudioStream
+var prev_time_control = 0
+@export var sfx_shift_up_1 = AudioStream
+@export var sfx_shift_up_2 = AudioStream
+@export var sfx_shift_down_1 = AudioStream
+@export var sfx_shift_down_2 = AudioStream
 
 @onready var smoke_fx: AnimatedSprite2D = $TimeSmokeFX
 @onready var time_light_fx: AnimatedSprite2D = $TimeLightFX
 @onready var head_color: AnimatedSprite2D = $AnimatedHeadSprite/HeadColor
 @export var head_color_map: Dictionary[GameManager.TimeControl, Color]
+
+# Falling Check Vars
+var apex_y: float = 0.0
+var prev_on_floor: bool = true
+@export var fall_threshold: float = 10
 
 var TIME_CONTROL_MULTIPLIER : float = 1.0
 @export var speed_map : Dictionary[GameManager.TimeControl, float] = {
@@ -43,6 +53,21 @@ func handle_time_control_changed(new_time_control : GameManager.TimeControl):
 	head_color.self_modulate = head_color_map[new_time_control]
 	head_color.play("default")
 
+	match new_time_control:
+		0:
+			load_timeshift_sfx(sfx_shift_down_2)
+			$SfxTimeshiftPlayer.play()
+		1:
+			if(prev_time_control == 0):
+				load_timeshift_sfx(sfx_shift_up_1)
+			elif(prev_time_control == 2):
+				load_timeshift_sfx(sfx_shift_down_1)
+			$SfxTimeshiftPlayer.play()
+		2:
+			load_timeshift_sfx(sfx_shift_up_2)
+			$SfxTimeshiftPlayer.play()
+	prev_time_control = new_time_control
+	
 	TIME_CONTROL_MULTIPLIER = speed_map[new_time_control]
 	_animated_head_sprite.set_speed_scale(speed_map[new_time_control])
 	
@@ -77,12 +102,22 @@ func _physics_process(delta: float):
 	var IsInMidair = get_slide_collision_count() == 0
 	var TimeControlForceMultiplier = sqrt(TIME_CONTROL_MULTIPLIER)
 	
+	if prev_on_floor and !IsOnFloor: # if newly off floor
+		apex_y = global_position.y
+	if !prev_on_floor and IsOnFloor: # if newly on floor
+		if global_position.y - apex_y >= fall_threshold:
+			$SfxLandingPlayer.play()
+	prev_on_floor = IsOnFloor
+		
+	
 	if IsOnFloor:
 		if HAS_BURNED_WALL_JUMP:
 			HAS_BURNED_WALL_JUMP = false
 		if HAS_BURNED_COYOTE_JUMP:
 			HAS_BURNED_COYOTE_JUMP = false
 		ELAPSED_COYOTE_TIME_SECONDS = 0
+	else:
+		apex_y = min(apex_y, global_position.y)
 	
 	if IsInMidair && !HAS_BURNED_COYOTE_JUMP:
 		ELAPSED_COYOTE_TIME_SECONDS += delta
@@ -93,15 +128,15 @@ func _physics_process(delta: float):
 		if IsOnFloor:
 			velocity.y = -1 * JUMP_FORCE_Y * TimeControlForceMultiplier
 			DidJump = true
-			load_sfx(sfx_jump)
-			%SfxPlayer.play()
+			load_motion_sfx(sfx_jump)
+			%SfxMotionPlayer.play()
 			# player only gets coyote jump if they leave the ground without jumping.
 			HAS_BURNED_COYOTE_JUMP = true
 		elif is_on_wall() && !HAS_BURNED_WALL_JUMP:
 			velocity.x = get_collided_wall_normal().x * JUMP_FORCE_X * TimeControlForceMultiplier
 			velocity.y = -1 * JUMP_FORCE_Y_WALL * TimeControlForceMultiplier
-			load_sfx(sfx_walljump)
-			%SfxPlayer.play()
+			load_motion_sfx(sfx_walljump)
+			%SfxMotionPlayer.play()
 			HAS_BURNED_WALL_JUMP = true
 			DidJump = true
 	if Input.is_action_just_pressed("jump") && IsInMidair && !HAS_BURNED_COYOTE_JUMP:
@@ -111,8 +146,8 @@ func _physics_process(delta: float):
 				ELAPSED_COYOTE_TIME_SECONDS = 0
 				HAS_BURNED_COYOTE_JUMP = true
 				DidJump = true
-				load_sfx(sfx_jump)
-				%SfxPlayer.play()
+				load_motion_sfx(sfx_jump)
+				%SfxMotionPlayer.play()
 				
 	if DidJump:
 		FRAMES_SINCE_JUMPED = INT_MAX
@@ -226,16 +261,21 @@ func get_god_mode_speed_mult(is_god_mode: bool):
 	else:
 		return 1
 
-func load_sfx(sfx_to_load):
-	if %SfxPlayer.stream != sfx_to_load:
-		%SfxPlayer.stop()
-		%SfxPlayer.stream = sfx_to_load
+func load_motion_sfx(sfx_to_load):
+	if %SfxMotionPlayer.stream != sfx_to_load:
+		%SfxMotionPlayer.stop()
+		%SfxMotionPlayer.stream = sfx_to_load
+		
+func load_timeshift_sfx(sfx_to_load):
+	if $SfxTimeshiftPlayer.stream != sfx_to_load:
+		$SfxTimeshiftPlayer.stop()
+		$SfxTimeshiftPlayer.stream = sfx_to_load
 
 func _on_animated_body_sprite_frame_changed() -> void:
 	if %AnimatedBodySprite.animation == "running":
 		if %AnimatedBodySprite.frame == 0: 
-			load_sfx(sfx_footstep_1)
-			%SfxPlayer.play()
+			load_motion_sfx(sfx_footstep_1)
+			%SfxMotionPlayer.play()
 		if %AnimatedBodySprite.frame == 2: 
-			load_sfx(sfx_footstep_2)
-			%SfxPlayer.play()
+			load_motion_sfx(sfx_footstep_2)
+			%SfxMotionPlayer.play()

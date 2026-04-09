@@ -10,9 +10,17 @@
 [ext_resource type="AudioStream" uid="uid://cmj5n03l3xuhl" path="res://Audio/SFX/Sfx_Walljump.wav" id="5_otte4"]
 [ext_resource type="Texture2D" uid="uid://c0yd2ifdo8tdq" path="res://Art/Sprites/Effects/Smoke Fx  Pixel 07-vertical-swirl.png" id="5_r4x55"]
 [ext_resource type="Texture2D" uid="uid://dj8nxb0xak86n" path="res://Art/Sprites/Props/Light/Light_5/5-0.png" id="6_cl0yw"]
+[ext_resource type="AudioStream" uid="uid://bp3dewx6nu071" path="res://Audio/SFX/Sfx_Shift_Up_1.wav" id="6_n8cba"]
+[ext_resource type="AudioStream" uid="uid://bod41h28v8y3d" path="res://Audio/SFX/Sfx_Shift_Up_2.wav" id="7_0eqq0"]
 [ext_resource type="Texture2D" uid="uid://dyxn3h57e2y6k" path="res://Art/Sprites/Props/Light/Light_5/5-1.png" id="7_vjvuw"]
+[ext_resource type="AudioStream" uid="uid://05r2130nsxy4" path="res://Audio/SFX/Sfx_Shift_Down_1.wav" id="8_ildqw"]
 [ext_resource type="Texture2D" uid="uid://bmhol55yn77s6" path="res://Art/Sprites/Props/Light/Light_5/5-2.png" id="8_uvrlg"]
+[ext_resource type="AudioStream" uid="uid://mct6v5fd1to6" path="res://Audio/SFX/Sfx_Shift_Down_2.wav" id="9_ba1h1"]
 [ext_resource type="Texture2D" uid="uid://bqxv118ncjcg8" path="res://Art/Sprites/Props/Light/Light_5/5-3.png" id="9_fkgr2"]
+[ext_resource type="AudioStream" uid="uid://cf12bmslxgdne" path="res://Audio/SFX/Sfx_Land-01.wav" id="14_oqds6"]
+[ext_resource type="AudioStream" uid="uid://b4kavwr0pjuek" path="res://Audio/SFX/Sfx_Land-02.wav" id="15_xnxt3"]
+[ext_resource type="AudioStream" uid="uid://u1k6wqww61ct" path="res://Audio/SFX/Sfx_Land-03.wav" id="16_c8bqh"]
+[ext_resource type="AudioStream" uid="uid://dbx4vkii28t27" path="res://Audio/SFX/Sfx_Land-04.wav" id="17_vcjqu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8cba"]
 atlas = ExtResource("6_cl0yw")
@@ -221,6 +229,13 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_n8cba"]
+streams_count = 4
+stream_0/stream = ExtResource("14_oqds6")
+stream_1/stream = ExtResource("15_xnxt3")
+stream_2/stream = ExtResource("16_c8bqh")
+stream_3/stream = ExtResource("17_vcjqu")
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1692276012]
 collision_layer = 2
 script = ExtResource("1_v7sut")
@@ -230,7 +245,11 @@ sfx_footstep_1 = ExtResource("2_qg2eu")
 sfx_footstep_2 = ExtResource("3_lxmjj")
 sfx_jump = ExtResource("4_uk32v")
 sfx_walljump = ExtResource("5_otte4")
-head_color_map = Dictionary[int, Color]({
+sfx_shift_up_1 = ExtResource("6_n8cba")
+sfx_shift_up_2 = ExtResource("7_0eqq0")
+sfx_shift_down_1 = ExtResource("8_ildqw")
+sfx_shift_down_2 = ExtResource("9_ba1h1")
+head_color_map = Dictionary[Variant, Color]({
 0: Color(1, 1, 1, 0),
 1: Color(1, 0.5294118, 0, 0.3529412),
 2: Color(1, 0, 0, 0.39215687)
@@ -280,9 +299,18 @@ sprite_frames = SubResource("SpriteFrames_0eqq0")
 frame = 15
 frame_progress = 1.0
 
-[node name="SfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=439564156]
+[node name="SfxMotionPlayer" type="AudioStreamPlayer2D" parent="." unique_id=439564156]
 unique_name_in_owner = true
 volume_db = -5.0
+bus = &"SFX"
+
+[node name="SfxLandingPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2123642740]
+stream = SubResource("AudioStreamRandomizer_n8cba")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="SfxTimeshiftPlayer" type="AudioStreamPlayer2D" parent="." unique_id=600456692]
+volume_db = -6.0
 bus = &"SFX"
 
 [connection signal="frame_changed" from="AnimatedBodySprite" to="." method="_on_animated_body_sprite_frame_changed"]
